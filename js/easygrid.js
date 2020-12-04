@@ -202,13 +202,32 @@ class EasyGrid {
     }
 
     // ** METHODS **
+
     // Refresh Grid
     Refresh(content) {
+
+        // Refresh grid positioning
         this.RefreshGrid();
     }
+
     // Add New Item
     AddItem(content) {
+
+        // Add Item to grid
         this.AddItems(content);
     }
 
+    // Start up Easygrid from scrath
+    SetupEasyGrid() {
+
+        // Setup Columns
+        this.SetupColumns();
+    }
+
+    // Clear Grid
+    Clear() {
+
+        // Clear current grid and apend items again in the same order
+        document.getElementById(this.selector).innerHTML = "";
+    }
 }
