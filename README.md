@@ -94,6 +94,7 @@ demo1.SetupEasyGrid();
 | `width` | `Integer` | `Integer` | Width of the elements|
 | `height` | `Integer` | `random` or `Integer` |  Height of the elements|
 | `margin` | `Integer` | `Integer` |  Margin between elements|
+| `config` > `fetchFromHTML` | `Boolean` | --- |  Fetch elements inside main div to EasyGrid|
 | `animations` > `fadeInSpeed` | `Integer` | `1000ms` |  FadeIn Speed when new item is added|
 | `colors` > `background` | `String` | `random`, `HEX`, `RGBA` |  Background color of the element|
 
@@ -106,6 +107,9 @@ document.addEventListener("DOMContentLoaded", function() {
              width: "150",
              height: "250px",
              margin: "5",
+             config: {
+              fetchFromHTML: true
+             },
              animations: {
                fadeInSpeed: "100"
              },
@@ -114,4 +118,19 @@ document.addEventListener("DOMContentLoaded", function() {
              }
         });
 });
+```
+
+<b>FetchFromHTML Example:</b><br>
+To fetch elements from html, it has to be placed inside main div and with a specific class called: `easygrid_fetch`
+
+```html
+  <!--  Main Div -->
+  <div id="grid" class="easygrid_bvgrid">
+
+        <!-- This item will be fetched to EasyGrid and then removed -->
+        <div class="easygrid_fetch" style="display:none;">
+            <!-- HTML Elements -->
+        </div>
+
+  </div>
 ```
