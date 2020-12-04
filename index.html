@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="BVSelect Jquery">
+  <meta name="author" content="Bruno Vieira">
+
+  <title>EasyGrid - VanillaJS Grid </title>
+
+  <!-- EasyGrid Plugin Style -->
+  <link rel="stylesheet" type="text/css" href="css/easygrid.css">
+
+  <!-- DEMO ONLY -->
+  <link href="demo-template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body style="min-height:1000px;">
+  
+    <div style="text-align: center; margin-top: 27px; margin-bottom: 33px; border-bottom: 1px solid #e3e3e3; padding-bottom: 22px;">
+      <img style="width:300px;" src="demo-template/images/easy.png">
+    </div>
+
+    <!-- Ambient Main Div -->
+    <div id="grid" class="easygrid_bvgrid" style="width:100%;"></div>
+
+    <script src="js/easygrid.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+          var demo1 = new EasyGrid({
+            selector: "#grid",
+            width: "100",
+            height: "random",
+            margin: "10",
+            animations: {
+              fadeInSpeed: "100"
+            },
+            colors: {
+              background: "random"
+            }
+          });
+
+    
+     var interval = setInterval(function(){ demo1.AddItem("texto"); }, 100);    
+         setTimeout(function(){ clearInterval(interval) }, 6000);  
+     });
+    </script>
+
+</body>
+</html>

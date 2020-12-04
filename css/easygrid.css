@@ -1,0 +1,29 @@
+/* *****************************
+
+BVAmbient - VanillaJS Particle Background
+Developed by: Bruno Vieira
+
+**************************** */
+
+.easygrid_column
+{
+	position:relative;
+}
+.easygrid_bvgrid
+{
+	display:flex;
+	margin: 10px auto 0;
+	padding-right:10px;
+}
+.easygrid_block
+{
+	border: ;
+	word-break: break-all;
+	position: relative;
+	color: transparent;
+	border-radius: 5px;
+	box-sizing: border-box;
+	transition: all 1s linear;
+
+}
+
