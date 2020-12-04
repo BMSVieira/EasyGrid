@@ -52,3 +52,37 @@ document.addEventListener("DOMContentLoaded", function() {
      });
 });
 ```
+Methods:
+-
+<b>Refresh:</b>
+Refresh Grid Positioning
+
+```javascript
+demo1.Refresh();
+```
+
+<b>Add Items:</b>
+Add a new item to grid
+
+| Value | Description |
+| --- | --- |
+| `String` | Elements to add, can be HTML Elements, Images, etc... |
+
+```javascript
+demo1.AddItem("HTML Elements to Add");
+```
+
+<b>Clear:</b>
+Removes all items and all columns
+
+```javascript
+demo1.Clear();
+```
+
+<b>SetupEasyGrid:</b>
+Add responsive columns.
+After use of SetupEasyGrid() it can be added new items again.
+
+```javascript
+demo1.SetupEasyGrid();
+```
