@@ -14,7 +14,7 @@
 
 Demo:
 -
-https://bmsvieira.github.io/BVAmbient/
+https://bmsvieira.github.io/EasyGrid/
 
 🟨 Installation:
 -
