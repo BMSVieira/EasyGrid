@@ -1,5 +1,4 @@
-EasyGrid - Vanilla JS Grid
---
+
 <p align="center">
 <img width="400" src="https://github.com/BMSVieira/EasyGrid/blob/main/demo-template/images/easy_small.png">
 </p>
@@ -7,7 +6,7 @@ EasyGrid - Vanilla JS Grid
 Powerful Responsive Grid Generator
 </p>
 
-Features:
+🟨 Features:
 -
 - 🔧 Fully Customizable
 - 💪 No Dependencies, built with VanillaJS
@@ -20,7 +19,7 @@ Demo:
 -
 https://bmsvieira.github.io/BVAmbient/
 
-Installation:
+🟨 Installation:
 -
 
 1 - Include JavaScript Source.
@@ -52,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
      });
 });
 ```
-Methods:
+🟨 Methods:
 -
 <b>Refresh:</b>
 Refresh Grid Positioning
