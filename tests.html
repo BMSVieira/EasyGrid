@@ -18,17 +18,48 @@
 </head>
 <body style="min-height:1000px;">
   
-    <div style="text-align: center; margin-top: 27px; margin-bottom: 33px;">
-      <img style="width:300px;" src="demo-template/images/easy.png"><br>
-      <div style="background-color: #eee; padding: 6px; margin-top: 25px;">
-      <button id="" class="btn btn-light">Random Tiles</button>
-      <button id="" class="btn btn-light">Boostrap Card</button>
-      <button id="" class="btn btn-light">Movie Posters</button>
-      </div>
-    </div>
 
     <!-- Ambient Main Div -->
-    <div id="grid" class="easygrid_bvgrid" style="width:100%;"></div>
+    <div id="grid" class="easygrid_bvgrid" style="width:100%;">
+
+            <!-- ITEM -->
+            <div class="easygrid_fetch" style="display:none;">
+                <div style="color:black;" class="card movie_card">
+                  <img src="https://via.placeholder.com/200x270" class="card-img-top" alt="..."> 
+                    <div class="card-body"> 
+                      <i class="fas fa-play play_button" data-toggle="tooltip" data-placement="bottom" title="Play Trailer"></i> 
+                      <h5 class="card-title" style="font-weight: bold; margin-left: -3px;">Movie Name</h5>
+                      <span class="movie_info">2019</span> 
+                      <span class="movie_info float-right"><i class="fas fa-star"></i> 9 / 10</span>
+                   </div> 
+                </div>
+            </div>
+            <!-- ITEM -->
+            <div class="easygrid_fetch" style="display:none;">
+                <div style="color:black;" class="card movie_card">
+                  <img src="https://via.placeholder.com/200x270" class="card-img-top" alt="..."> 
+                    <div class="card-body"> 
+                      <i class="fas fa-play play_button" data-toggle="tooltip" data-placement="bottom" title="Play Trailer"></i> 
+                      <h5 class="card-title" style="font-weight: bold; margin-left: -3px;">Movie Name</h5>
+                      <span class="movie_info">2019</span> 
+                      <span class="movie_info float-right"><i class="fas fa-star"></i> 9 / 10</span>
+                   </div> 
+                </div>
+            </div>
+            <!-- ITEM -->
+            <div class="easygrid_fetch" style="display:none;">
+                <div style="color:black;" class="card movie_card">
+                  <img src="https://via.placeholder.com/200x270" class="card-img-top" alt="..."> 
+                    <div class="card-body"> 
+                      <i class="fas fa-play play_button" data-toggle="tooltip" data-placement="bottom" title="Play Trailer"></i> 
+                      <h5 class="card-title" style="font-weight: bold; margin-left: -3px;">Movie Name</h5>
+                      <span class="movie_info">2019</span> 
+                      <span class="movie_info float-right"><i class="fas fa-star"></i> 9 / 10</span>
+                   </div> 
+                </div>
+            </div>
+
+    </div>
 
     <script src="js/easygrid.js"></script>
     <script>
@@ -36,27 +67,19 @@
 
           var demo1 = new EasyGrid({
             selector: "#grid",
-            width: "300",
+            width: "200",
             height: "auto",
-            margin: "10",
+            margin: "5",
+            config: {
+              fetchFromHTML: false
+            },
             animations: {
               fadeInSpeed: "100"
             },
             colors: {
-              background: "transparent"
+              background: "random"
             }
           });
-
-    
-     var interval = setInterval(function(){ demo1.AddItem('<div class="card" style="color:black; width: 100%;"><img class="card-img-top" src="https://via.placeholder.com/286x180" alt="Card image cap"><div class="card-body"><h5 class="card-title">Card title</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p><a href="#" class="btn btn-primary">Go somewhere</a></div></div>'); }, 100);    
-     
-         setTimeout(function(){ clearInterval(interval);
-            demo1.Clear();
-            demo1.SetupEasyGrid();
-
-            demo1.AddItem('<div class="card" style="color:black; width: 100%;"><img class="card-img-top" src="https://via.placeholder.com/286x180" alt="Card image cap"><div class="card-body"><h5 class="card-title">Card title</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p><a href="#" class="btn btn-primary">Go somewhere</a></div></div>');
-
-          }, 6000);  
      });
 
     </script>

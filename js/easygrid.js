@@ -15,6 +15,9 @@ class EasyGrid {
         width = '260',
         height = "auto",
         margin = "60",
+        config = {
+            fetchFromHTML: true
+         },
         animations = {
             fadeInSpeed: "100"
         },
@@ -30,6 +33,7 @@ class EasyGrid {
         this.margin = margin;
         this.animation = animations;
         this.colors = colors;
+        this.config = config;
 
         // Global Variables
         var randomID = Math.floor(Math.random() * (9999 - 0 + 1)) + 0;
@@ -39,6 +43,7 @@ class EasyGrid {
         var margin = this.margin;
         var animations = this.animation;
         var colors = this.colors;
+        var config = this.config;
         var ncolumns, additem;
         var widthM = 0;;
         var countAddblock=0;
@@ -70,10 +75,8 @@ class EasyGrid {
         }
 
         // Add items to easy grid
-        var AddItems = this.AddItems = function AddItems(content, resized_item)
+        var AddItems = this.AddItems = function AddItems(content)
         {
-            if(resized_item == undefined) {resized_item = 0;}
-
             // Get width of div
             var rect_main = document.getElementById(selector);
             var ChildItems = 0, bvgridLess = "easygrid_column_1";;
@@ -149,6 +152,25 @@ class EasyGrid {
             // Setup Columns
             this.SetupColumns();
 
+            // If Fetch from HTML is true, it will fetch all HTML items inside main div
+            if(config.fetchFromHTML == true)
+            {
+
+                // Set original items to display none
+                document.querySelectorAll("#"+selector + ' .easygrid_fetch').forEach((item_original) => {
+                    item_original.style.display = "none";
+                });
+
+                document.querySelectorAll("#"+selector + ' .easygrid_fetch').forEach((item_fetch) => {
+                    
+                    // Fetch items from HTML and add to EasyGrid
+                    AddItems(item_fetch.innerHTML);
+                    // Remove original item
+                    item_fetch.remove();
+
+                });
+            }
+
         };
 
         // Refresh Grid when resized
@@ -189,7 +211,7 @@ class EasyGrid {
                 // Loop trough array and append items
                 var arrayLength = itemsArray.length;
                 for (var array_block = 0; array_block < arrayLength; array_block++) {
-                    AddItems(itemsArray[array_block].innerHTML, 1);
+                    AddItems(itemsArray[array_block].innerHTML);
                 }
 
                 widthM = rect_check_width;
