@@ -65,7 +65,7 @@ Add a new item to grid
 
 | Value | Description |
 | --- | --- |
-| `String` | Elements to add, can be HTML Elements, Images, etc... |
+| `String` | Elements to add, can be `HTML Elements`, `Images`, `etc..`. |
 
 ```javascript
 demo1.AddItem("HTML Elements to Add");
