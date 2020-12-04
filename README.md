@@ -3,7 +3,6 @@ EasyGrid - Vanilla JS Grid
 <p align="center">
 <img width="400" src="https://github.com/BMSVieira/EasyGrid/blob/main/demo-template/images/easy_small.png">
 </p>
-<br>
 <p align="center">
 Powerful Responsive Grid Generator
 </p>
