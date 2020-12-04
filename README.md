@@ -46,6 +46,9 @@ document.addEventListener("DOMContentLoaded", function() {
          background: "random"
        }
      });
+     
+     // Add item to Grid
+     demo1.AddItem('HTML Element');
 });
 ```
 🟨 Methods:
