@@ -85,3 +85,33 @@ After use of SetupEasyGrid() it can be added new items again.
 ```javascript
 demo1.SetupEasyGrid();
 ```
+
+🟨 Settings:
+-
+| Option | Type | Options Available | Description |
+| --- | --- | --- | --- |
+| `selector` | `String`  | `---` |  Specify ID of the element|
+| `width` | `Integer` | `Integer` | Width of the elements|
+| `height` | `Integer` | `random` or `Integer` |  Height of the elements|
+| `margin` | `Integer` | `Integer` |  Margin between elements|
+| `animations` > `fadeInSpeed` | `Integer` | `1000ms` |  FadeIn Speed when new item is added|
+| `colors` > `background` | `String` | `random`, `HEX`, `RGBA` |  Background color of the element|
+
+<b>Full Example:</b>
+
+```javascript
+document.addEventListener("DOMContentLoaded", function() {
+        var demo1 = new EasyGrid({
+             selector: "#grid",
+             width: "150",
+             height: "250px",
+             margin: "5",
+             animations: {
+               fadeInSpeed: "100"
+             },
+             colors: {
+               background: "random"
+             }
+        });
+});
+```
