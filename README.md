@@ -65,10 +65,18 @@ Add a new item to grid
 
 | Value | Description |
 | --- | --- |
-| `String` | Elements to add, can be `HTML Elements`, `Images`, `etc..`. |
+| `String` | Add a new item |
+| `Array` / `Object` | Add multiple items at once  |
 
 ```javascript
-demo1.AddItem("HTML Elements to Add");
+
+// Single Element
+var ItemToAdd = "HTML Element";
+demo1.AddItem(ItemToAdd);
+
+// Array of Elements
+var ItemsToAdd = ["1", "2", "3", "4", "5", "6", "7", "8"];
+demo1.AddItem(ItemsToAdd);
 ```
 
 <b>Clear:</b>
