@@ -17,8 +17,6 @@ Developed by: Bruno Vieira
 {
 	word-break: break-all;
 	position: relative;
-	color: transparent;
-	border-radius: 5px;
 	box-sizing: border-box;
 }
 

@@ -19,10 +19,12 @@ class EasyGrid {
             fetchFromHTML: true
          },
         animations = {
-            fadeInSpeed: "100"
+            fadeInSpeed: "100",
+            addItemSpeed: "100"
         },
-        colors = {
-            background: "rgb(96, 120, 134)"
+        style = {
+            background: "rgb(96, 120, 134)",
+            borderRadius: '5'
         }
     }) 
     {
@@ -32,7 +34,7 @@ class EasyGrid {
         this.height = height;
         this.margin = margin;
         this.animation = animations;
-        this.colors = colors;
+        this.style = style;
         this.config = config;
 
         // Global Variables
@@ -43,7 +45,7 @@ class EasyGrid {
         var height = this.height;
         var margin = this.margin;
         var animations = this.animation;
-        var colors = this.colors;
+        var style = this.style;
         var config = this.config;
         var ncolumns, additem;
         var widthM = 0;;
@@ -77,6 +79,8 @@ class EasyGrid {
               }
               return color;
         }
+
+
 
         // Add items to easy grid
         var AddItems = this.AddItems = function AddItems(content)
@@ -115,18 +119,19 @@ class EasyGrid {
             countAddblock++;
 
             // Check Color
-            if(colors.background == 'random') { var bgColor = getRandomColor(); } else {  var bgColor = colors.background; }
+            if(style.background == 'random') { var bgColor = getRandomColor(); } else {  var bgColor = style.background; }
 
             // Check if height is random or not
             if(height == "random") { var heightToApply = Math.floor(Math.random() * (300 - 100 + 1)) + 100+"px"; } else { var heightToApply = height+"px"; }
 
             // Insert New Item
-            newItem.insertAdjacentHTML('beforeend', "<div id='block_"+countAddblock+"' style='background-color:"+bgColor+"; margin-bottom:"+margin+"px; height:"+heightToApply+"' class='easygrid_block'>"+content+"</div>"); 
+            newItem.insertAdjacentHTML('beforeend', "<div id='block_"+countAddblock+"' style='opacity:0; background-color:"+bgColor+"; margin-bottom:"+margin+"px; border-radius:"+style.borderRadius+"px; height:"+heightToApply+"' class='easygrid_block'>"+content+"</div>"); 
         
             var block = document.getElementById("block_"+countAddblock);
 
             // Fade In Item
             fadeIn(block, animations.fadeInSpeed);
+
         }
 
         // Setup Columns
@@ -223,7 +228,9 @@ class EasyGrid {
                 widthM = rect_check_width;
             } else { return; }
         }
-          window.onresize = RefreshGrid;
+
+        // Check Window Resize
+        window.onresize = RefreshGrid;
 
         // ** SETUP GRID **
         this.SetupGrid();
@@ -239,7 +246,12 @@ class EasyGrid {
     }
 
     // Add New Item
-    AddItem(content) {
+    async AddItem(content) {
+
+        // Function to Sleep
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
 
         // OnComplete Callback
         function onComplete(callback) { 
@@ -251,6 +263,9 @@ class EasyGrid {
         {
             // Loop object and add invidual items
             var prop = Object.keys(content.items).length;
+
+            // Loop object and add invidual items
+            var prop = Object.keys(content.items).length;
             for (var i = 0; i < prop; i++) {
 
                 // Check if object is empty
@@ -258,6 +273,7 @@ class EasyGrid {
                 {
                     // Add Item to grid
                     this.AddItems(content["items"][i]);
+                    await sleep(this.animation.addItemSpeed); // Wait
                 }
             }
 
