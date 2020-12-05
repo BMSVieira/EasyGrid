@@ -62,7 +62,7 @@ Refresh Grid Positioning
 demo1.Refresh();
 ```
 
-<b>Add Items:</b>
+<b>AddItem:</b>
 Add a new item to grid
 
 | Value | Description |
