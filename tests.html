@@ -18,8 +18,8 @@
 </head>
 <body style="min-height:1000px;">
   
-    <!-- Ambient Main Div -->
-    <div id="grid" class="easygrid_bvgrid" style="width:100%;"> </div>
+    <!-- EasyGrid Main Div -->
+    <div id="grid" class="easygrid_bvgrid" style="width:100%; margin-top:5px;"> </div>
 
     <script src="js/easygrid.js"></script>
     <script>
@@ -28,7 +28,7 @@
           var demo1 = new EasyGrid({
             selector: "#grid",
             width: "150",
-            height: "250",
+            height: "random",
             margin: "5",
             config: {
               fetchFromHTML: false
@@ -41,10 +41,11 @@
             }
           });
 
+        var eg = ["1", "2", "3", "4", "5", "6", "7", "8"];
+        var eg = "Simple String";
+
          // Append Items
-         interval = setInterval(function(){ demo1.AddItem('.'); }, 100);  
-         // Clear Timeout  
-         settimeout = setTimeout(function(){ clearInterval(interval); }, 5000);  
+         demo1.AddItem(eg);
 
      });
 

@@ -22,7 +22,7 @@ class EasyGrid {
             fadeInSpeed: "100"
         },
         colors = {
-              background: "rgb(96, 120, 134)"
+            background: "rgb(96, 120, 134)"
         }
     }) 
     {
@@ -39,6 +39,7 @@ class EasyGrid {
         var randomID = Math.floor(Math.random() * (9999 - 0 + 1)) + 0;
         var selector = this.selector;
         var width = this.width;
+        var requestedWidth = this.width;
         var height = this.height;
         var margin = this.margin;
         var animations = this.animation;
@@ -141,6 +142,9 @@ class EasyGrid {
             var ncolumns = rect_main.offsetWidth / Number(width);
             ncolumns = Math.floor(ncolumns);
 
+            // Check if width of container is less than request item width
+            if(widthM < requestedWidth){ ncolumns = 2; if(widthM < requestedWidth/2) { ncolumns = 1; } } else { width = requestedWidth;}
+
             // Set main columns
             for (var i = 1; i <= Math.floor(ncolumns); i++) {
                 document.getElementById(selector).insertAdjacentHTML('beforeend', "<div id='easygrid_column_"+i+"' style='padding-left:"+margin+"px; width:100%;' class='easygrid_column'></div>");  
@@ -158,7 +162,6 @@ class EasyGrid {
             // If Fetch from HTML is true, it will fetch all HTML items inside main div
             if(config.fetchFromHTML == true)
             {
-
                 // Set original items to display none
                 document.querySelectorAll("#"+selector + ' .easygrid_fetch').forEach((item_original) => {
                     item_original.style.display = "none";
@@ -238,8 +241,24 @@ class EasyGrid {
     // Add New Item
     AddItem(content) {
 
-        // Add Item to grid
-        this.AddItems(content);
+        // Check if content is object
+        if(content && typeof(content) === 'object')
+        {
+            // Loop object and add invidual items
+            var prop = Object.keys(content).length;
+            for (var i = 0; i < prop; i++) {
+
+                // Check if object is empty
+                if(content[i] != "")
+                {
+                    // Add Item to grid
+                    this.AddItems(content[i]);
+                }
+            }
+        } else {
+            // Add Item to grid
+            this.AddItems(content);
+        }
     }
 
     // Start up Easygrid from scrath
