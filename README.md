@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
      
      // Add items to Grid
      demo1.AddItem({
-        items: "HTML Elements"
+        items: "HTML Element"
      });
 });
 ```
@@ -72,10 +72,10 @@ Add a new item to grid
 
 ```javascript
 
-// Single Element
+// Single
 var Elements = "HTML Element";
-// Array of Elements
-var Elements = ["1", "2", "3", "4", "5", "6", "7", "8"];
+// Array
+var Elements = ["HTML Element 1", "HTML  Element 2", "HTML  Element 3", "HTML  Element 4"];
 
 demo1.AddItem({
    items: Elements,
