@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
      var demo1 = new EasyGrid({
        selector: "#grid",
        width: "150",
-       height: "250px",
+       height: "250",
        margin: "5",
        animations: {
          fadeInSpeed: "100"
@@ -91,9 +91,9 @@ demo1.SetupEasyGrid();
 | Option | Type | Options Available | Description |
 | --- | --- | --- | --- |
 | `selector` | `String`  | `---` |  Specify ID of the element|
-| `width` | `Integer` | `Integer` | Width of the elements|
-| `height` | `Integer` | `random` or `Integer` |  Height of the elements|
-| `margin` | `Integer` | `Integer` |  Margin between elements|
+| `width` | `Integer` | `Integer` | Width (px) of the elements|
+| `height` | `Integer` | `random` or `Integer` |  Height (px) of the elements|
+| `margin` | `Integer` | `Integer` |  Margin (px) between elements|
 | `config` > `fetchFromHTML` | `Boolean` | --- |  Fetch elements inside main div to EasyGrid|
 | `animations` > `fadeInSpeed` | `Integer` | `1000ms` |  FadeIn Speed when new item is added|
 | `colors` > `background` | `String` | `random`, `HEX`, `RGBA` |  Background color of the element|
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var demo1 = new EasyGrid({
              selector: "#grid",
              width: "150",
-             height: "250px",
+             height: "250",
              margin: "5",
              config: {
               fetchFromHTML: true
