@@ -48,6 +48,9 @@ class EasyGrid {
         var widthM = 0;;
         var countAddblock=0;
 
+        // Apply style to main grid container
+        document.getElementById(selector).style.paddingRight = margin+"px";
+
         // Fade in Function
         function fadeIn(el, time) {
           el.style.opacity = 0;
@@ -114,7 +117,7 @@ class EasyGrid {
             if(colors.background == 'random') { var bgColor = getRandomColor(); } else {  var bgColor = colors.background; }
 
             // Check if height is random or not
-            if(height == "random") { var heightToApply = Math.floor(Math.random() * (300 - 100 + 1)) + 100+"px"; } else { var heightToApply = height; }
+            if(height == "random") { var heightToApply = Math.floor(Math.random() * (300 - 100 + 1)) + 100+"px"; } else { var heightToApply = height+"px"; }
 
             // Insert New Item
             newItem.insertAdjacentHTML('beforeend', "<div id='block_"+countAddblock+"' style='background-color:"+bgColor+"; margin-bottom:"+margin+"px; height:"+heightToApply+"' class='easygrid_block'>"+content+"</div>"); 
