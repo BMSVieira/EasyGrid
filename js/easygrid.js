@@ -241,23 +241,36 @@ class EasyGrid {
     // Add New Item
     AddItem(content) {
 
+        // OnComplete Callback
+        function onComplete(callback) { 
+            if (typeof callback == "function") { callback();}
+        } 
+
         // Check if content is object
-        if(content && typeof(content) === 'object')
+        if(content.items && typeof(content.items) === 'object')
         {
             // Loop object and add invidual items
-            var prop = Object.keys(content).length;
+            var prop = Object.keys(content.items).length;
             for (var i = 0; i < prop; i++) {
 
                 // Check if object is empty
-                if(content[i] != "")
+                if(content["items"][i] != "")
                 {
                     // Add Item to grid
-                    this.AddItems(content[i]);
+                    this.AddItems(content["items"][i]);
                 }
             }
+
+            // if is "onComplete" is a function, call it back.
+            if (typeof content.onComplete == "function") { onComplete(content.onComplete); }
+
         } else {
+
             // Add Item to grid
-            this.AddItems(content);
+            this.AddItems(content.items);
+
+            // if is "onComplete" is a function, call it back.
+            if (typeof content.onComplete == "function") { onComplete(content.onComplete); }
         }
     }
 

@@ -7,7 +7,7 @@
   <meta name="description" content="grid, easygrid, vanillajs, responsive grid, responsive, javscriptgrid, easy grid">
   <meta name="author" content="Bruno Vieira">
 
-  <title>EasyGrid - VanillaJS Grid </title>
+  <title>EasyGrid - VanillaJS Responsive Grid </title>
 
   <!-- EasyGrid Plugin Style -->
   <link rel="stylesheet" type="text/css" href="css/easygrid.css">
@@ -101,7 +101,13 @@
 
 
                    // Append Items
-                   interval = setInterval(function(){ demo1.AddItem('.'); }, 100);  
+                   interval = setInterval(function(){ 
+
+                         demo1.AddItem({
+                            items: ""
+                          });
+
+                    }, 100);  
                    // Clear Timeout  
                    settimeout = setTimeout(function(){ clearInterval(interval); }, 5000);  
              });      
@@ -135,7 +141,13 @@
                     clearInterval(interval);
 
                     // Append Items
-                    interval = setInterval(function(){ demo1.AddItem('<div class="card" style="color:black; width: 100%;"><img class="card-img-top" src="https://via.placeholder.com/286x180" alt="Card image cap"><div class="card-body"><h5 class="card-title">Card title</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p><a href="#" class="btn btn-primary">Go somewhere</a></div></div>'); }, 100); 
+                    interval = setInterval(function(){ 
+
+                         demo1.AddItem({
+                            items: '<div class="card" style="color:black; width: 100%;"><img class="card-img-top" src="https://via.placeholder.com/286x180" alt="Card image cap"><div class="card-body"><h5 class="card-title">Card title</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p><a href="#" class="btn btn-primary">Go somewhere</a></div></div>'
+                          });
+
+                       }, 100); 
 
                     // Clear Timeout  
                     settimeout = setTimeout(function(){ clearInterval(interval); }, 3000);  
@@ -170,7 +182,13 @@
                     clearInterval(interval);
 
                     // Append Items
-                    interval = setInterval(function(){ demo1.AddItem('<div style="color:black;" class="card movie_card"><img src="https://via.placeholder.com/200x270" class="card-img-top" alt="..."> <div class="card-body"> <i class="fas fa-play play_button" data-toggle="tooltip" data-placement="bottom" title="Play Trailer"></i> <h5 class="card-title" style="font-weight: bold; margin-left: -3px;">Movie Name</h5> <span class="movie_info">2019</span> <span class="movie_info float-right"><i class="fas fa-star"></i> 9 / 10</span></div> </div>'); }, 100); 
+                    interval = setInterval(function(){
+
+                         demo1.AddItem({
+                            items: '<div style="color:black;" class="card movie_card"><img src="https://via.placeholder.com/200x270" class="card-img-top" alt="..."> <div class="card-body"> <i class="fas fa-play play_button" data-toggle="tooltip" data-placement="bottom" title="Play Trailer"></i> <h5 class="card-title" style="font-weight: bold; margin-left: -3px;">Movie Name</h5> <span class="movie_info">2019</span> <span class="movie_info float-right"><i class="fas fa-star"></i> 9 / 10</span></div> </div>'
+                          });
+
+                      }, 100); 
 
                     // Clear Timeout  
                     settimeout = setTimeout(function(){ clearInterval(interval); }, 3000);  
@@ -204,7 +222,13 @@
                     clearInterval(interval);
 
                     // Append Items
-                    interval = setInterval(function(){ demo1.AddItem('<div style="text-align:center;"><img src="https://via.placeholder.com/200x270"></div>'); }, 100); 
+                    interval = setInterval(function(){ 
+
+                         demo1.AddItem({
+                            items: '<div style="text-align:center;"><img src="https://via.placeholder.com/200x270"></div>'
+                          });
+
+                    }, 100); 
 
                     // Clear Timeout  
                     settimeout = setTimeout(function(){ clearInterval(interval); }, 3000);  
@@ -238,7 +262,13 @@
                     clearInterval(interval);
 
                     // Append Items
-                    interval = setInterval(function(){ demo1.AddItem('...'); }, 100); 
+                    interval = setInterval(function(){ 
+
+                         demo1.AddItem({
+                            items: ""
+                          });
+
+                     }, 100); 
 
                     // Clear Timeout  
                     settimeout = setTimeout(function(){ clearInterval(interval); }, 3000);  
