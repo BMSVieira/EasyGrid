@@ -47,8 +47,10 @@ document.addEventListener("DOMContentLoaded", function() {
        }
      });
      
-     // Add item to Grid
-     demo1.AddItem('HTML Element');
+     // Add items to Grid
+     demo1.AddItem({
+        items: "HTML Elements"
+     });
 });
 ```
 🟨 Methods:
@@ -71,12 +73,16 @@ Add a new item to grid
 ```javascript
 
 // Single Element
-var ItemToAdd = "HTML Element";
-demo1.AddItem(ItemToAdd);
-
+var Elements = "HTML Element";
 // Array of Elements
-var ItemsToAdd = ["1", "2", "3", "4", "5", "6", "7", "8"];
-demo1.AddItem(ItemsToAdd);
+var Elements = ["1", "2", "3", "4", "5", "6", "7", "8"];
+
+demo1.AddItem({
+   items: Elements,
+   onComplete: function(){
+     console.log("Completed!");
+   } 
+});
 ```
 
 <b>Clear:</b>
