@@ -7,7 +7,6 @@ Made by: Bruno Vieira
 
 --------------------------- */
 
-
 class EasyGrid {
 
     constructor({
@@ -71,16 +70,27 @@ class EasyGrid {
         }
 
         // Generates a random hex color
-        function getRandomColor() {
-              var letters = '0123456789ABCDEF';
-              var color = '#';
-              for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-              }
-              return color;
+        function getRandomColor(type) {
+
+            switch(type) {
+              case "random": // In case its Random color
+
+                      var letters = '0123456789ABCDEF';
+                      var color = '#';
+                      for (var i = 0; i < 6; i++) {
+                        color += letters[Math.floor(Math.random() * 16)];
+                      }
+                      return color;
+
+                break;
+                case "shadesOfGrey": // In case its Shades of Grey
+
+                    var v = (Math.random()*(256)|0).toString(16);//bitwise OR. Gives value in the range 0-255 which is then converted to base 16 (hex).
+                    return "#" + v + v + v;
+
+                break;
+            } 
         }
-
-
 
         // Add items to easy grid
         var AddItems = this.AddItems = function AddItems(content)
@@ -119,7 +129,7 @@ class EasyGrid {
             countAddblock++;
 
             // Check Color
-            if(style.background == 'random') { var bgColor = getRandomColor(); } else {  var bgColor = style.background; }
+            if(style.background == 'random' || (style.background == 'shadesOfGrey')) { var bgColor = getRandomColor(style.background); } else {  var bgColor = style.background; }
 
             // Check if height is random or not
             if(height == "random") { var heightToApply = Math.floor(Math.random() * (300 - 100 + 1)) + 100+"px"; } else { var heightToApply = height+"px"; }
@@ -148,7 +158,7 @@ class EasyGrid {
             ncolumns = Math.floor(ncolumns);
 
             // Check if width of container is less than request item width
-            if(widthM < requestedWidth){ ncolumns = 2; if(widthM < requestedWidth/2) { ncolumns = 1; } } else { width = requestedWidth;}
+            if(widthM < requestedWidth){ ncolumns = 1; if(widthM < requestedWidth/2) { ncolumns = 2; } } else { width = requestedWidth;}
 
             // Set main columns
             for (var i = 1; i <= Math.floor(ncolumns); i++) {
