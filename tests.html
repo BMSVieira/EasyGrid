@@ -27,9 +27,13 @@
 
           var demo1 = new EasyGrid({
             selector: "#grid",
-            width: "200",
-            height: "random",
-            margin: "5",
+            dimensions: {
+              width: "100",
+              height: "random",
+              margin: "5",
+              minHeight: "100",
+              maxHeight: "300"
+            },
             config: {
               fetchFromHTML: false
             },
@@ -39,7 +43,7 @@
             },
             style: {
               background: "random",
-              borderRadius: "5"
+              borderRadius: "0"
             }
           });
 

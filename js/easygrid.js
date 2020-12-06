@@ -11,9 +11,13 @@ class EasyGrid {
 
     constructor({
         selector = 'defaultId',
-        width = '260',
-        height = "auto",
-        margin = "60",
+        dimensions = {
+          width: "150",
+          height: "100",
+          margin: "5",
+          minHeight: "100",
+          maxHeight: "300"
+        },
         config = {
             fetchFromHTML: true
          },
@@ -29,22 +33,29 @@ class EasyGrid {
     {
         // Define Variables
         this.selector = selector.substring(1);
-        this.width = width;
-        this.height = height;
-        this.margin = margin;
+        this.width = dimensions.width;
+        this.height = dimensions.height;
+        this.margin = dimensions.margin;
         this.animation = animations;
         this.style = style;
         this.config = config;
+        this.dimensions = dimensions;
 
-        // Global Variables
+        // Selector
         var randomID = Math.floor(Math.random() * (9999 - 0 + 1)) + 0;
         var selector = this.selector;
-        var width = this.width;
-        var requestedWidth = this.width;
-        var height = this.height;
-        var margin = this.margin;
+        // Dimensions
+        var width = this.dimensions["width"];
+        var requestedWidth = this.dimensions["width"];
+        var height = this.dimensions["height"];
+        var margin = this.dimensions["margin"];
+        var minHeight = this.dimensions["minHeight"];
+        var maxHeight = this.dimensions["maxHeight"];
+        // Animations
         var animations = this.animation;
+        // Style
         var style = this.style;
+        // Config
         var config = this.config;
         var ncolumns, additem;
         var widthM = 0;;
@@ -132,7 +143,7 @@ class EasyGrid {
             if(style.background == 'random' || (style.background == 'shadesOfGrey')) { var bgColor = getRandomColor(style.background); } else {  var bgColor = style.background; }
 
             // Check if height is random or not
-            if(height == "random") { var heightToApply = Math.floor(Math.random() * (300 - 100 + 1)) + 100+"px"; } else { var heightToApply = height+"px"; }
+            if(height == "random") { var heightToApply = Math.floor(Math.random() * (Number(maxHeight) - Number(minHeight) + 1)) + Number(minHeight)+"px"; } else { var heightToApply = height+"px"; }
 
             // Insert New Item
             newItem.insertAdjacentHTML('beforeend', "<div id='block_"+countAddblock+"' style='opacity:0; background-color:"+bgColor+"; margin-bottom:"+margin+"px; border-radius:"+style.borderRadius+"px; height:"+heightToApply+"' class='easygrid_block'>"+content+"</div>"); 

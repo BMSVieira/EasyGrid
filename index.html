@@ -49,12 +49,12 @@
           </div>
           <div class="row" style="margin-top:30px;">
               <div class="col-12 col-md-12 cold-sm-12" style="text-align:center;">
-                  <button style="margin-bottom:10px; z-index:9999; position:relative;" id="randomtiles" class="btn btn-dark">Random Tiles</button>
+                  <button style="margin-bottom:10px; z-index:9999; position:relative;" id="randomtiles" class="btn btn-dark">Random Height</button>
                   <button style="margin-bottom:10px; z-index:9999; position:relative;" id="fixedheight" class="btn btn-dark">Fixed Height</button>
                   <button style="margin-bottom:10px; z-index:9999; position:relative;" id="boostrapcards" class="btn btn-dark">Bootstrap Cards</button>
                   <button style="margin-bottom:10px; z-index:9999; position:relative;" id="festuredposts" class="btn btn-dark">Bootstrap Posts</button>                 
                   <button style="margin-bottom:10px; z-index:9999; position:relative;" id="moviecards" class="btn btn-dark">Movie List</button>
-                  <button style="margin-bottom:10px; z-index:9999; position:relative;" id="imagetiles" class="btn btn-dark">Image Tiles</button>                 
+                  <button style="margin-bottom:10px; z-index:9999; position:relative;" id="imagetiles" class="btn btn-dark">Images</button>                 
               </div>
               <div id="hidewhenclick" class="col-12 col-md-12 cold-sm-12" style="text-align:center; margin-top: -27px;">
                 <i style="position: relative; left: 235px; left: 0px; top: 27px;" class="arrow up"></i>
@@ -84,9 +84,13 @@
 
                     var demo1 = new EasyGrid({
                       selector: "#grid",
-                      width: "150",
-                      height: "random",
-                      margin: "15",
+                      dimensions: {
+                        width: "150",
+                        height: "random",
+                        margin: "15",
+                        minHeight: "100",
+                        maxHeight: "300"
+                      },
                       animations: {
                         fadeInSpeed: "500"
                       },
@@ -124,9 +128,13 @@
 
                     var demo1 = new EasyGrid({
                       selector: "#grid",
-                      width: "300",
-                      height: "auto",
-                      margin: "10",
+                      dimensions: {
+                        width: "300",
+                        height: "auto",
+                        margin: "10",
+                        minHeight: "20",
+                        maxHeight: "40"
+                      },
                       animations: {
                         fadeInSpeed: "100"
                       },
@@ -156,7 +164,7 @@
 
         }); 
 
-        /* BOOSTRAP CARDS */
+        /* MOVIE CARDS */
         document.getElementById("moviecards").addEventListener("click", function() {
 
                     // Clear Previous Demo Cicle
@@ -166,9 +174,13 @@
 
                     var demo1 = new EasyGrid({
                       selector: "#grid",
-                      width: "200",
-                      height: "auto",
-                      margin: "10",
+                      dimensions: {
+                        width: "200",
+                        height: "auto",
+                        margin: "10",
+                        minHeight: "20",
+                        maxHeight: "40"
+                      },
                       animations: {
                         fadeInSpeed: "100"
                       },
@@ -207,9 +219,13 @@
 
                     var demo1 = new EasyGrid({
                       selector: "#grid",
-                      width: "200",
-                      height: "auto",
-                      margin: "10",
+                      dimensions: {
+                        width: "200",
+                        height: "auto",
+                        margin: "10",
+                        minHeight: "20",
+                        maxHeight: "40"
+                      },
                       animations: {
                         fadeInSpeed: "100"
                       },
@@ -248,9 +264,13 @@
 
                     var demo1 = new EasyGrid({
                       selector: "#grid",
-                      width: "150",
-                      height: "270",
-                      margin: "5",
+                      dimensions: {
+                        width: "150",
+                        height: "270",
+                        margin: "5",
+                        minHeight: "20",
+                        maxHeight: "40"
+                      },
                       animations: {
                         fadeInSpeed: "100"
                       },
@@ -289,9 +309,13 @@
 
                     var demo1 = new EasyGrid({
                       selector: "#grid",
-                      width: "600",
-                      height: "auto",
-                      margin: "10",
+                      dimensions: {
+                        width: "600",
+                        height: "auto",
+                        margin: "10",
+                        minHeight: "20",
+                        maxHeight: "40"
+                      },
                       animations: {
                         fadeInSpeed: "100"
                       },
