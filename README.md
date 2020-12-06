@@ -36,9 +36,13 @@ https://bmsvieira.github.io/EasyGrid/
 document.addEventListener("DOMContentLoaded", function() {
      var demo1 = new EasyGrid({
        selector: "#grid",
-       width: "150",
-       height: "250",
-       margin: "5",
+       dimensions: {
+         width: "150",
+         height: "270",
+         margin: "5",
+         minHeight: "20", // if height is "random"
+         maxHeight: "40"  // if height is "random"
+       },
        animations: {
          fadeInSpeed: "100",
          addItemSpeed: "100"
@@ -107,9 +111,11 @@ demo1.SetupEasyGrid();
 | Option | Type | Options Available | Description |
 | --- | --- | --- | --- |
 | `selector` | `String`  | `---` |  Specify ID of the element|
-| `width` | `Integer` | `Integer` | Width (px) of the elements|
-| `height` | `Integer` | `random` or `Integer` |  Height (px) of the elements|
-| `margin` | `Integer` | `Integer` |  Margin (px) between elements|
+| `dimensions` > `width` | `Integer` | `Integer` | Width (px) of the elements|
+| `dimensions` > `height` | `Integer` | `random` or `Integer` |  Height (px) of the elements|
+| `dimensions` > `margin` | `Integer` | `Integer` |  Margin (px) between elements|
+| `dimensions` > `minHeight` | `Integer` | `Integer` |  Min. Height (px) of the elements if height is `random`|
+| `dimensions` > `maxHeight` | `Integer` | `Integer` |  Max. Height (px) of the elements if height is `random`| 
 | `config` > `fetchFromHTML` | `Boolean` | --- |  Fetch elements inside main div to EasyGrid|
 | `animations` > `fadeInSpeed` | `Integer` | `Integer` |  Speed(ms) that the item takes to appear completely after being added|
 | `animations` > `addItemSpeed` | `Integer` | `Integer` |  Speed(ms) at which each item is added|
@@ -122,9 +128,13 @@ demo1.SetupEasyGrid();
 document.addEventListener("DOMContentLoaded", function() {
         var demo1 = new EasyGrid({
              selector: "#grid",
-             width: "150",
-             height: "250",
-             margin: "5",
+             dimensions: {
+              width: "150",
+              height: "270",
+              margin: "5",
+              minHeight: "20", // if height is "random"
+              maxHeight: "40"  // if height is "random"
+             },
              config: {
               fetchFromHTML: true
              },
