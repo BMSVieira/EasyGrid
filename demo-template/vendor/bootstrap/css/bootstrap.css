@@ -557,6 +557,8 @@ pre code {
   .container {
     max-width: 540px;
   }
+
+
 }
 
 @media (min-width: 768px) {
@@ -9770,6 +9772,7 @@ button.bg-dark:focus {
   .text-sm-center {
     text-align: center !important;
   }
+
 }
 
 @media (min-width: 768px) {
@@ -10036,3 +10039,12 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+
+@media (max-width: 568px) {
+      .logo
+      {
+        width:300px;
+      }
+
+  }
