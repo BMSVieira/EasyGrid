@@ -113,7 +113,7 @@ demo1.SetupEasyGrid();
 | `config` > `fetchFromHTML` | `Boolean` | --- |  Fetch elements inside main div to EasyGrid|
 | `animations` > `fadeInSpeed` | `Integer` | `Integer` |  Speed(ms) that the item takes to appear completely after being added|
 | `animations` > `addItemSpeed` | `Integer` | `Integer` |  Speed(ms) at which each item is added|
-| `style` > `background` | `String` | `random`, `HEX`, `RGBA` |  Item's Background color|
+| `style` > `background` | `String` | `random`, `shadesOfGrey`, `HEX`, `RGBA` |  Item's Background color|
 | `style` > `borderRadius` | `Integer` | `Integer` |  Item's Border Radius|
 
 <b>Full Example:</b>
