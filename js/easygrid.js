@@ -33,9 +33,6 @@ class EasyGrid {
     {
         // Define Variables
         this.selector = selector.substring(1);
-        this.width = dimensions.width;
-        this.height = dimensions.height;
-        this.margin = dimensions.margin;
         this.animation = animations;
         this.style = style;
         this.config = config;
@@ -58,8 +55,10 @@ class EasyGrid {
         // Config
         var config = this.config;
         var ncolumns, additem;
-        var widthM = 0;;
+        var widthM = 0;
+        var widthM2 = 0;
         var countAddblock=0;
+        var _this = this;
 
         // Apply style to main grid container
         document.getElementById(selector).style.paddingRight = margin+"px";
@@ -106,18 +105,26 @@ class EasyGrid {
         // Add items to easy grid
         var AddItems = this.AddItems = function AddItems(content)
         {
+            // Update variable values in case it was change with method
+            height = _this.dimensions["height"];
+            minHeight = _this.dimensions["minHeight"];
+            maxHeight = _this.dimensions["maxHeight"];
+            margin = _this.dimensions["margin"];
+            style = _this.style;
+
             // Get width of div
             var rect_main = document.getElementById(selector);
-            var ChildItems = 0, bvgridLess = "easygrid_column_1";;
+            var ChildItems = 0, bvgridLess = "easygrid_column_1_"+randomID;
+
             var maxColumns = document.querySelectorAll("#"+selector + ' .easygrid_column ').length;
 
             document.querySelectorAll("#"+selector + ' .easygrid_column ').forEach((item) => {
                 if(item.childElementCount > ChildItems)
                 {
                     // If it is last element, goes back to 1
-                    if(item.id == "easygrid_column_"+maxColumns)
+                    if(item.id == "easygrid_column_"+maxColumns+"_"+randomID)
                     {
-                        bvgridLess = "easygrid_column_1";
+                        bvgridLess = "easygrid_column_1_"+randomID;
                         ChildItems = item.childElementCount;  
                     } else {
                         bvgridLess = item.id;
@@ -133,6 +140,7 @@ class EasyGrid {
                 }
             });
 
+
             // Append Style
             var newItem = document.getElementById(bvgridLess);
 
@@ -146,9 +154,9 @@ class EasyGrid {
             if(height == "random") { var heightToApply = Math.floor(Math.random() * (Number(maxHeight) - Number(minHeight) + 1)) + Number(minHeight)+"px"; } else { var heightToApply = height+"px"; }
 
             // Insert New Item
-            newItem.insertAdjacentHTML('beforeend', "<div id='block_"+countAddblock+"' style='opacity:0; background-color:"+bgColor+"; margin-bottom:"+margin+"px; border-radius:"+style.borderRadius+"px; height:"+heightToApply+"' class='easygrid_block'>"+content+"</div>"); 
+            newItem.insertAdjacentHTML('beforeend', "<div id='block_"+countAddblock+"_"+randomID+"' style='opacity:0; background-color:"+bgColor+"; margin-bottom:"+margin+"px; border-radius:"+style.borderRadius+"px; height:"+heightToApply+"' class='easygrid_block'>"+content+"</div>"); 
         
-            var block = document.getElementById("block_"+countAddblock);
+            var block = document.getElementById("block_"+countAddblock+"_"+randomID);
 
             // Fade In Item
             fadeIn(block, animations.fadeInSpeed);
@@ -156,8 +164,13 @@ class EasyGrid {
         }
 
         // Setup Columns
-        var SetupColumns = this.SetupColumns = function SetupColumns(content)
+        var SetupColumns = this.SetupColumns = async function SetupColumns()
         {
+            // Update variable values in case it was change with method
+            width = _this.dimensions["width"];
+            requestedWidth = _this.dimensions["width"];
+            margin = _this.dimensions["margin"];
+
             // Get width of div
             var rect_main = document.getElementById(selector);
 
@@ -173,10 +186,9 @@ class EasyGrid {
 
             // Set main columns
             for (var i = 1; i <= Math.floor(ncolumns); i++) {
-                document.getElementById(selector).insertAdjacentHTML('beforeend', "<div id='easygrid_column_"+i+"' style='padding-left:"+margin+"px; width:100%;' class='easygrid_column'></div>");  
+                document.getElementById(selector).insertAdjacentHTML('beforeend', "<div id='easygrid_column_"+i+"_"+randomID+"' style='padding-left:"+margin+"px; width:100%;' class='easygrid_column'></div>");  
             }
 
-            return ncolumns;
         }
 
         // Startup EasyGrid
@@ -202,40 +214,57 @@ class EasyGrid {
 
                 });
             }
-
         };
 
-        // Refresh Grid when resized
-        var RefreshGrid = this.RefreshGrid = function RefreshGrid()
-        {
+        // Main throttle function
+        function throttle (func, interval) {
+          var timeout;
+          return function() {
+            var context = this, args = arguments;
+            var later = function () {
+              timeout = false;
+            };
+            if (!timeout) {
+              func.apply(context, args)
+              timeout = true;
+              setTimeout(later, interval)
+            }
+          }
+        }
+
+        // My function that will run repeatedly at each fixed interval of time.
+        var ResizeWindow = throttle(function() {
+            console.clear();
             var rect_main_new = document.getElementById(selector);
             var rect_check_width = rect_main_new.offsetWidth;
-            var countBlocks = 0;
-            countAddblock = 0;
 
-            if(rect_check_width != widthM)
+
+            if(rect_check_width != widthM2)
             {
+
                 // Get get all elements from current columns
+                var countBlocks = 0;
+                countAddblock = 0;
                 var itemsArray = [];
+
                 document.querySelectorAll("#"+selector + ' .easygrid_column ').forEach((item) => {
 
                     var idColumn = item.id;
                     document.querySelectorAll("#"+idColumn + ' .easygrid_block').forEach((itemBlock) => {
 
                         // Increase block count
-                        countBlocks++;
+                        var str2 = itemBlock.id;
+                        itemsArray.push(({'element': itemBlock.innerHTML, 'sort': str2.split("_").pop()}));
+
                     });
 
                 });
 
-                // Grab All elements to array
-                for (var bl = 1; bl <= countBlocks; bl++) {
-                    var BlockCompleteElem = document.getElementById("block_"+bl);
-                    itemsArray.push(BlockCompleteElem);
-                }
+                // Sort array
+                itemsArray.sort(function(a, b) { return a.sort - b.sort; });
 
-                // Clear current grid and apend items again in the same order
-                document.getElementById(selector).innerHTML = "";
+                // Empty grid
+                document.getElementById(_this.selector).innerHTML = "";
 
                 // Setup Columns
                 SetupColumns();
@@ -243,15 +272,17 @@ class EasyGrid {
                 // Loop trough array and append items
                 var arrayLength = itemsArray.length;
                 for (var array_block = 0; array_block < arrayLength; array_block++) {
-                    AddItems(itemsArray[array_block].innerHTML);
+                    AddItems(itemsArray[array_block]["element"]);
                 }
 
-                widthM = rect_check_width;
             } else { return; }
-        }
 
-        // Check Window Resize
-        window.onresize = RefreshGrid;
+            widthM2 = rect_check_width;
+
+        }, 100); // Adjust interval of time
+
+        // Add EventListener
+        window.addEventListener('resize', ResizeWindow);
 
         // ** SETUP GRID **
         this.SetupGrid();
@@ -316,6 +347,27 @@ class EasyGrid {
 
         // Setup Columns
         this.SetupColumns();
+    }
+
+    // Clear Grid
+    Change(content) {
+
+        // Check if content is object
+        if(content && typeof(content) === 'object')
+        {
+            // Clear grid in case someone want to change while is adding items
+            document.getElementById(this.selector).innerHTML = "";
+
+            // Update values
+            this.dimensions = content.dimensions;
+            this.style = content.style;
+
+            // Setup Columns with new width
+            this.SetupColumns();
+
+        } else {
+            console.log("Properties must be Object, Check documentation.")
+        }
     }
 
     // Clear Grid

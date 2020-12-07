@@ -71,8 +71,26 @@
     <script src="js/easygrid.js"></script>
     <script>
 
-        var interval, settimeout;
-        document.getElementById("randomtiles").click();
+        var interval, settimeout, demo1, demo2;
+        document.addEventListener("DOMContentLoaded", function() {
+              demo1 = new EasyGrid({
+                  selector: "#grid",
+                  dimensions: {
+                    width: "150",
+                    height: "random",
+                    margin: "15",
+                    minHeight: "100",
+                    maxHeight: "300"
+                  },
+                  animations: {
+                    fadeInSpeed: "500"
+                  },
+                  style: {
+                    background: "random",
+                    borderRadius: "5"
+                  }
+              });
+        });
 
         /* RANDOM TILES */
         document.getElementById("randomtiles").addEventListener("click", function() {
@@ -82,32 +100,22 @@
                     clearInterval(settimeout);
                     document.getElementById("hidewhenclick").style.display = "none";
 
-                    var demo1 = new EasyGrid({
-                      selector: "#grid",
-                      dimensions: {
-                        width: "150",
-                        height: "random",
-                        margin: "15",
-                        minHeight: "100",
-                        maxHeight: "300"
-                      },
-                      animations: {
-                        fadeInSpeed: "500"
-                      },
-                      style: {
-                        background: "random",
-                        borderRadius: "5"
-                      }
+                    demo1.Change({
+                         dimensions: {
+                          width: "150",
+                          height: "random",
+                          margin: "15",
+                          minHeight: "100", // if height is "random"
+                          maxHeight: "300"  // if height is "random"
+                         },
+                         style: {
+                           background: "random",
+                           borderRadius: "5"
+                         }
                     });
-
-                    // Clean Previous Demo Results
-                    demo1.Clear();
-                    demo1.SetupEasyGrid();
-
 
                    // Append Items
                    interval = setInterval(function(){ 
-
                          demo1.AddItem({
                             items: ""
                           });
@@ -115,8 +123,40 @@
                     }, 100);  
                    // Clear Timeout  
                    settimeout = setTimeout(function(){ clearInterval(interval); }, 5000);  
-             });      
+        });     
 
+        /* FIXED HEIGHT */
+        document.getElementById("fixedheight").addEventListener("click", function() {
+
+                    // Clear Previous Demo Cicle
+                    clearInterval(interval);
+                    clearInterval(settimeout);
+                    document.getElementById("hidewhenclick").style.display = "none";
+
+                    demo1.Change({
+                         dimensions: {
+                          width: "150",
+                          height: "270",
+                          margin: "5",
+                          minHeight: "100", // if height is "random"
+                          maxHeight: "300"  // if height is "random"
+                         },
+                         style: {
+                           background: "random",
+                           borderRadius: "5"
+                         }
+                    });
+
+                   // Append Items
+                   interval = setInterval(function(){ 
+                         demo1.AddItem({
+                            items: ""
+                          });
+
+                    }, 100);  
+                   // Clear Timeout  
+                   settimeout = setTimeout(function(){ clearInterval(interval); }, 5000);  
+        }); 
 
         /* BOOSTRAP CARDS */
         document.getElementById("boostrapcards").addEventListener("click", function() {
@@ -126,29 +166,19 @@
                     clearInterval(settimeout);
                     document.getElementById("hidewhenclick").style.display = "none";
 
-                    var demo1 = new EasyGrid({
-                      selector: "#grid",
-                      dimensions: {
-                        width: "300",
-                        height: "auto",
-                        margin: "10",
-                        minHeight: "20",
-                        maxHeight: "40"
-                      },
-                      animations: {
-                        fadeInSpeed: "100"
-                      },
-                      style: {
-                        background: "transparent",
-                        borderRadius: "5"
-                      }
+                    demo1.Change({
+                         dimensions: {
+                          width: "300",
+                          height: "auto",
+                          margin: "10",
+                          minHeight: "100", // if height is "random"
+                          maxHeight: "300"  // if height is "random"
+                         },
+                         style: {
+                           background: "random",
+                           borderRadius: "5"
+                         }
                     });
-
-                    // Clean Previous Demo Results
-                    demo1.Clear();
-                    demo1.SetupEasyGrid();
-
-                    clearInterval(interval);
 
                     // Append Items
                     interval = setInterval(function(){ 
@@ -164,6 +194,41 @@
 
         }); 
 
+        /* FEATURED POSTS */
+        document.getElementById("festuredposts").addEventListener("click", function() {
+
+                    // Clear Previous Demo Cicle
+                    clearInterval(interval);
+                    clearInterval(settimeout);
+                    document.getElementById("hidewhenclick").style.display = "none";
+
+                    demo1.Change({
+                         dimensions: {
+                          width: "600",
+                          height: "auto",
+                          margin: "10",
+                          minHeight: "100", // if height is "random"
+                          maxHeight: "300"  // if height is "random"
+                         },
+                         style: {
+                           background: "transparent",
+                           borderRadius: "5"
+                         }
+                    });
+
+                    // Append Items
+                    interval = setInterval(function(){
+
+                         demo1.AddItem({
+                            items: '<div style="width:100%;" class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"> <div class="col p-4 d-flex flex-column position-static"> <strong class="d-inline-block mb-2 text-primary">World</strong> <h3 class="mb-0">Featured post</h3> <div class="mb-1 text-muted">Nov 12</div><p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p><a href="#" class="stretched-link">Continue reading</a> </div><div class="col-auto d-none d-lg-block"> <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> </div></div>'
+                          });
+
+                      }, 100); 
+
+                    // Clear Timeout  
+                    settimeout = setTimeout(function(){ clearInterval(interval); }, 3000);  
+        }); 
+
         /* MOVIE CARDS */
         document.getElementById("moviecards").addEventListener("click", function() {
 
@@ -172,29 +237,19 @@
                     clearInterval(settimeout);
                     document.getElementById("hidewhenclick").style.display = "none";
 
-                    var demo1 = new EasyGrid({
-                      selector: "#grid",
-                      dimensions: {
-                        width: "200",
-                        height: "auto",
-                        margin: "10",
-                        minHeight: "20",
-                        maxHeight: "40"
-                      },
-                      animations: {
-                        fadeInSpeed: "100"
-                      },
-                      style: {
-                        background: "transparent",
-                        borderRadius: "5"
-                      }
+                    demo1.Change({
+                         dimensions: {
+                          width: "200",
+                          height: "auto",
+                          margin: "10",
+                          minHeight: "100", // if height is "random"
+                          maxHeight: "300"  // if height is "random"
+                         },
+                         style: {
+                           background: "random",
+                           borderRadius: "5"
+                         }
                     });
-
-                    // Clean Previous Demo Results
-                    demo1.Clear();
-                    demo1.SetupEasyGrid();
-
-                    clearInterval(interval);
 
                     // Append Items
                     interval = setInterval(function(){
@@ -217,29 +272,19 @@
                     clearInterval(settimeout);
                     document.getElementById("hidewhenclick").style.display = "none";
 
-                    var demo1 = new EasyGrid({
-                      selector: "#grid",
-                      dimensions: {
-                        width: "200",
-                        height: "auto",
-                        margin: "10",
-                        minHeight: "20",
-                        maxHeight: "40"
-                      },
-                      animations: {
-                        fadeInSpeed: "100"
-                      },
-                      style: {
-                        background: "transparent",
-                        borderRadius: "5"
-                      }
+                    demo1.Change({
+                         dimensions: {
+                          width: "200",
+                          height: "auto",
+                          margin: "10",
+                          minHeight: "100", // if height is "random"
+                          maxHeight: "300"  // if height is "random"
+                         },
+                         style: {
+                           background: "transparent",
+                           borderRadius: "5"
+                         }
                     });
-
-                    // Clean Previous Demo Results
-                    demo1.Clear();
-                    demo1.SetupEasyGrid();
-
-                    clearInterval(interval);
 
                     // Append Items
                     interval = setInterval(function(){ 
@@ -249,96 +294,6 @@
                           });
 
                     }, 100); 
-
-                    // Clear Timeout  
-                    settimeout = setTimeout(function(){ clearInterval(interval); }, 3000);  
-        }); 
-
-        /* FIXED HEIGHT */
-        document.getElementById("fixedheight").addEventListener("click", function() {
-
-                    // Clear Previous Demo Cicle
-                    clearInterval(interval);
-                    clearInterval(settimeout);
-                    document.getElementById("hidewhenclick").style.display = "none";
-
-                    var demo1 = new EasyGrid({
-                      selector: "#grid",
-                      dimensions: {
-                        width: "150",
-                        height: "270",
-                        margin: "5",
-                        minHeight: "20",
-                        maxHeight: "40"
-                      },
-                      animations: {
-                        fadeInSpeed: "100"
-                      },
-                      style: {
-                        background: "random",
-                        borderRadius: "5"
-                      }
-                    });
-
-                    // Clean Previous Demo Results
-                    demo1.Clear();
-                    demo1.SetupEasyGrid();
-
-                    clearInterval(interval);
-
-                    // Append Items
-                    interval = setInterval(function(){ 
-
-                         demo1.AddItem({
-                            items: ""
-                          });
-
-                     }, 100); 
-
-                    // Clear Timeout  
-                    settimeout = setTimeout(function(){ clearInterval(interval); }, 3000);  
-        }); 
-
-        /* FEATURED POSTS */
-        document.getElementById("festuredposts").addEventListener("click", function() {
-
-                    // Clear Previous Demo Cicle
-                    clearInterval(interval);
-                    clearInterval(settimeout);
-                    document.getElementById("hidewhenclick").style.display = "none";
-
-                    var demo1 = new EasyGrid({
-                      selector: "#grid",
-                      dimensions: {
-                        width: "600",
-                        height: "auto",
-                        margin: "10",
-                        minHeight: "20",
-                        maxHeight: "40"
-                      },
-                      animations: {
-                        fadeInSpeed: "100"
-                      },
-                      style: {
-                        background: "transparent",
-                        borderRadius: "5"
-                      }
-                    });
-
-                    // Clean Previous Demo Results
-                    demo1.Clear();
-                    demo1.SetupEasyGrid();
-
-                    clearInterval(interval);
-
-                    // Append Items
-                    interval = setInterval(function(){
-
-                         demo1.AddItem({
-                            items: '<div style="width:100%;" class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"> <div class="col p-4 d-flex flex-column position-static"> <strong class="d-inline-block mb-2 text-primary">World</strong> <h3 class="mb-0">Featured post</h3> <div class="mb-1 text-muted">Nov 12</div><p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p><a href="#" class="stretched-link">Continue reading</a> </div><div class="col-auto d-none d-lg-block"> <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> </div></div>'
-                          });
-
-                      }, 100); 
 
                     // Clear Timeout  
                     settimeout = setTimeout(function(){ clearInterval(interval); }, 3000);  
