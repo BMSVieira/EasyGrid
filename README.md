@@ -5,7 +5,7 @@
 <p align="center" size="20pt"><font size="20pt"><b><a href="https://github.com/BMSVieira/EasyGrid#-features">Features</a></b>  ▪️  <b><a href="https://github.com/BMSVieira/EasyGrid#-demo">Demo</a></b>  ▪️  <b><a href="https://github.com/BMSVieira/EasyGrid#-installation">Installation</a></b>   ▪️  <b><a href="https://github.com/BMSVieira/EasyGrid#-methods">Methods</a></b>  ▪️  <b><a href="https://github.com/BMSVieira/EasyGrid#-settings">Settings</a></b></font></p>
 
 
-🟨 Features:
+◼️ Features:
 -
 - 🔧 Fully Customizable
 - 💪 No Dependencies, built with VanillaJS
@@ -14,11 +14,11 @@
 - 📈 Fast & Reliable
 - 📚 Does not need CSS or any CSS Framework
 
-🟨 Demo:
+◼️ Demo:
 -
 https://bmsvieira.github.io/EasyGrid/
 
-🟨 Installation:
+◼️ Installation:
 -
 
 1 - Include JavaScript Source.
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
      });
 });
 ```
-🟨 Methods:
+◼️ Methods:
 -
 <b>Refresh:</b>
 Refresh Grid Positioning
@@ -127,7 +127,7 @@ After use of SetupEasyGrid() it can be added new items again.
 demo1.SetupEasyGrid();
 ```
 
-🟨 Settings:
+◼️ Settings:
 -
 | Option | Type | Options Available | Description |
 | --- | --- | --- | --- |
