@@ -91,6 +91,25 @@ demo1.AddItem({
 });
 ```
 
+<b>Change:</b>
+Applies changes to current Grid
+
+```javascript
+demo1.Change({
+     dimensions: {
+      width: "150",
+      height: "random",
+      margin: "15",
+      minHeight: "100", // if height is "random"
+      maxHeight: "300"  // if height is "random"
+     },
+     style: {
+       background: "random",
+       borderRadius: "5"
+     }
+});
+```
+
 <b>Clear:</b>
 Removes all items and all columns
 
@@ -154,13 +173,17 @@ document.addEventListener("DOMContentLoaded", function() {
 To fetch elements from html, it has to be placed inside main div and with a specific class called: `easygrid_fetch`
 
 ```html
-  <!--  Main Div -->
-  <div id="grid" class="easygrid_bvgrid">
+<!--  Main Div -->
+<div id="grid" class="easygrid_bvgrid">
 
-        <!-- This item will be fetched to EasyGrid and then removed -->
-        <div class="easygrid_fetch" style="display:none;">
-            <!-- HTML Elements -->
-        </div>
-
-  </div>
+    <!-- This item will be fetched to EasyGrid and then removed -->
+    <div class="easygrid_fetch" style="display:none;">
+        <!-- HTML Elements -->
+    </div>
+    <!-- This item will be fetched to EasyGrid and then removed -->
+    <div class="easygrid_fetch" style="display:none;">
+        <!-- HTML Elements -->
+    </div>
+ 
+</div>
 ```
