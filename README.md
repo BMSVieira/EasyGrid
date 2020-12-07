@@ -2,6 +2,8 @@
 <p align="center">
 <img width="400" src="https://github.com/BMSVieira/EasyGrid/blob/main/demo-template/images/easy_small.png">
 </p>
+<p align="center" size="20pt"><font size="20pt"><b><a href="https://github.com/BMSVieira/EasyGrid#-features">Features</a></b>  ▪️  <b><a href="https://github.com/BMSVieira/EasyGrid#demo">Demo</a></b>  ▪️  <b><a href="https://github.com/BMSVieira/EasyGrid#-installation">Installation</a></b>   ▪️  <b><a href="https://github.com/BMSVieira/EasyGrid#-methods">Methods</a></b>  ▪️  <b><a href="https://github.com/BMSVieira/EasyGrid#-settings">Settings</a></b></font></p>
+
 
 🟨 Features:
 -
@@ -12,7 +14,7 @@
 - 📈 Fast & Reliable
 - 📚 Does not need CSS or any CSS Framework
 
-Demo:
+🟨 Demo:
 -
 https://bmsvieira.github.io/EasyGrid/
 
