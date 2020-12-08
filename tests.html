@@ -28,8 +28,8 @@
           var demo1 = new EasyGrid({
             selector: "#grid",
             dimensions: {
-              width: "100",
-              height: "random",
+              width: "500",
+              height: "300",
               margin: "5",
               minHeight: "100",
               maxHeight: "300"
@@ -44,7 +44,21 @@
             style: {
               background: "random",
               borderRadius: "0"
-            }
+            },
+            responsive: [
+                {
+                  breakpoint: 1000,
+                  columns: 3
+                },
+                {
+                  breakpoint: 500,
+                  columns: 2
+                },
+                {
+                  breakpoint: 300,
+                  columns: 1
+                }
+            ]
           });
 
         var eg = ["1", "2", "3", "4", "5", "6", "7", "8"];
@@ -57,7 +71,6 @@
             console.log("Completed.");
           } 
         });
-
 
      });
 

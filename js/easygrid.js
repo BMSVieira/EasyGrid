@@ -28,7 +28,13 @@ class EasyGrid {
         style = {
             background: "rgb(96, 120, 134)",
             borderRadius: '5'
-        }
+        },
+        responsive = [
+            {
+              breakpoint: 300,
+              columns: 1
+            }
+        ]
     }) 
     {
         // Define Variables
@@ -37,6 +43,7 @@ class EasyGrid {
         this.style = style;
         this.config = config;
         this.dimensions = dimensions;
+        this.responsive = responsive;
 
         // Selector
         var randomID = Math.floor(Math.random() * (9999 - 0 + 1)) + 0;
@@ -48,6 +55,8 @@ class EasyGrid {
         var margin = this.dimensions["margin"];
         var minHeight = this.dimensions["minHeight"];
         var maxHeight = this.dimensions["maxHeight"];
+        // Responsive
+        var responsive = this.responsive;
         // Animations
         var animations = this.animation;
         // Style
@@ -55,9 +64,7 @@ class EasyGrid {
         // Config
         var config = this.config;
         var ncolumns, additem;
-        var widthM = 0;
-        var widthM2 = 0;
-        var countAddblock=0;
+        var widthM = 0, widthM2 = 0, countAddblock=0;
         var _this = this;
 
         // Apply style to main grid container
@@ -77,6 +84,22 @@ class EasyGrid {
             }
           };
           tick();
+        }
+
+        // Main throttle function
+        function throttle (func, interval) {
+          var timeout;
+          return function() {
+            var context = this, args = arguments;
+            var later = function () {
+              timeout = false;
+            };
+            if (!timeout) {
+              func.apply(context, args)
+              timeout = true;
+              setTimeout(later, interval)
+            }
+          }
         }
 
         // Generates a random hex color
@@ -166,10 +189,15 @@ class EasyGrid {
         // Setup Columns
         var SetupColumns = this.SetupColumns = async function SetupColumns()
         {
+
+            // Empty grid
+            document.getElementById(_this.selector).innerHTML = "";
+
             // Update variable values in case it was change with method
             width = _this.dimensions["width"];
             requestedWidth = _this.dimensions["width"];
             margin = _this.dimensions["margin"];
+            ncolumns = undefined;
 
             // Get width of div
             var rect_main = document.getElementById(selector);
@@ -178,11 +206,26 @@ class EasyGrid {
             widthM = rect_main.offsetWidth;
 
             // Get number of columns possible to fit
-            var ncolumns = rect_main.offsetWidth / Number(width);
+            ncolumns = rect_main.offsetWidth / Number(width);
             ncolumns = Math.floor(ncolumns);
 
             // Check if width of container is less than request item width
-            if(widthM < requestedWidth){ ncolumns = 1; if(widthM < requestedWidth/2) { ncolumns = 2; } } else { width = requestedWidth;}
+
+            if(widthM <= requestedWidth){ 
+               ncolumns = 1;
+            }
+
+            // Loop responsive object to get current viewport
+            for (var loop = 0; loop < responsive.length; loop++) {
+
+                if(widthM < responsive[loop].breakpoint) 
+                {  
+                    if(responsive[loop].columns != undefined)
+                    {
+                         ncolumns = responsive[loop].columns;  
+                    }
+                }
+            }
 
             // Set main columns
             for (var i = 1; i <= Math.floor(ncolumns); i++) {
@@ -216,28 +259,11 @@ class EasyGrid {
             }
         };
 
-        // Main throttle function
-        function throttle (func, interval) {
-          var timeout;
-          return function() {
-            var context = this, args = arguments;
-            var later = function () {
-              timeout = false;
-            };
-            if (!timeout) {
-              func.apply(context, args)
-              timeout = true;
-              setTimeout(later, interval)
-            }
-          }
-        }
-
         // My function that will run repeatedly at each fixed interval of time.
         var ResizeWindow = throttle(function() {
-            console.clear();
+
             var rect_main_new = document.getElementById(selector);
             var rect_check_width = rect_main_new.offsetWidth;
-
 
             if(rect_check_width != widthM2)
             {
@@ -254,7 +280,10 @@ class EasyGrid {
 
                         // Increase block count
                         var str2 = itemBlock.id;
-                        itemsArray.push(({'element': itemBlock.innerHTML, 'sort': str2.split("_").pop()}));
+                        var parts = str2.split('_');
+                        var blockid = parts[parts.length - 2];
+
+                        itemsArray.push(({'element': itemBlock.innerHTML, 'sort': blockid}));
 
                     });
 
@@ -262,9 +291,6 @@ class EasyGrid {
 
                 // Sort array
                 itemsArray.sort(function(a, b) { return a.sort - b.sort; });
-
-                // Empty grid
-                document.getElementById(_this.selector).innerHTML = "";
 
                 // Setup Columns
                 SetupColumns();
@@ -359,8 +385,15 @@ class EasyGrid {
             document.getElementById(this.selector).innerHTML = "";
 
             // Update values
-            this.dimensions = content.dimensions;
-            this.style = content.style;
+
+            // Check if contains Style
+            if ("style" in content) {
+                this.style = content.style;
+            }
+            // Check if contains Dimensions
+            if ("dimensions" in content) {
+                this.dimensions = content.dimensions;
+            }
 
             // Setup Columns with new width
             this.SetupColumns();
