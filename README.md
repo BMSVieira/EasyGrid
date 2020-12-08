@@ -2,8 +2,10 @@
 <p align="center">
 <img width="400" src="https://github.com/BMSVieira/EasyGrid/blob/main/demo-template/images/easy_small.png">
 </p>
+<p align="center" size="20pt"><font size="20pt"><b><a href="https://github.com/BMSVieira/EasyGrid#%EF%B8%8F-features">Features</a></b>  ▪️  <b><a href="https://github.com/BMSVieira/EasyGrid#%EF%B8%8F-demo">Demo</a></b>  ▪️  <b><a href="https://github.com/BMSVieira/EasyGrid#%EF%B8%8F-installation">Installation</a></b>   ▪️  <b><a href="https://github.com/BMSVieira/EasyGrid#%EF%B8%8F-methods">Methods</a></b>  ▪️  <b><a href="https://github.com/BMSVieira/EasyGrid#%EF%B8%8F-settings">Settings</a></b></font></p>
 
-🟨 Features:
+
+◼️ Features:
 -
 - 🔧 Fully Customizable
 - 💪 No Dependencies, built with VanillaJS
@@ -12,11 +14,11 @@
 - 📈 Fast & Reliable
 - 📚 Does not need CSS or any CSS Framework
 
-Demo:
+◼️ Demo:
 -
 https://bmsvieira.github.io/EasyGrid/
 
-🟨 Installation:
+◼️ Installation:
 -
 
 1 - Include JavaScript Source.
@@ -59,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
      });
 });
 ```
-🟨 Methods:
+◼️ Methods:
 -
 <b>Refresh:</b>
 Refresh Grid Positioning
@@ -91,6 +93,25 @@ demo1.AddItem({
 });
 ```
 
+<b>Change:</b>
+Applies changes to current Grid
+
+```javascript
+demo1.Change({
+     dimensions: {
+      width: "150",
+      height: "random",
+      margin: "15",
+      minHeight: "100", // if height is "random"
+      maxHeight: "300"  // if height is "random"
+     },
+     style: {
+       background: "random",
+       borderRadius: "5"
+     }
+});
+```
+
 <b>Clear:</b>
 Removes all items and all columns
 
@@ -106,7 +127,7 @@ After use of SetupEasyGrid() it can be added new items again.
 demo1.SetupEasyGrid();
 ```
 
-🟨 Settings:
+◼️ Settings:
 -
 | Option | Type | Options Available | Description |
 | --- | --- | --- | --- |
@@ -154,13 +175,17 @@ document.addEventListener("DOMContentLoaded", function() {
 To fetch elements from html, it has to be placed inside main div and with a specific class called: `easygrid_fetch`
 
 ```html
-  <!--  Main Div -->
-  <div id="grid" class="easygrid_bvgrid">
+<!--  Main Div -->
+<div id="grid" class="easygrid_bvgrid">
 
-        <!-- This item will be fetched to EasyGrid and then removed -->
-        <div class="easygrid_fetch" style="display:none;">
-            <!-- HTML Elements -->
-        </div>
-
-  </div>
+    <!-- This item will be fetched to EasyGrid and then removed -->
+    <div class="easygrid_fetch" style="display:none;">
+        <!-- HTML Elements -->
+    </div>
+    <!-- This item will be fetched to EasyGrid and then removed -->
+    <div class="easygrid_fetch" style="display:none;">
+        <!-- HTML Elements -->
+    </div>
+ 
+</div>
 ```
