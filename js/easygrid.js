@@ -44,6 +44,7 @@ class EasyGrid {
         this.config = config;
         this.dimensions = dimensions;
         this.responsive = responsive;
+        this.queueItem = 0;
 
         // Selector
         var randomID = Math.floor(Math.random() * (9999 - 0 + 1)) + 0;
@@ -163,7 +164,6 @@ class EasyGrid {
                 }
             });
 
-
             // Append Style
             var newItem = document.getElementById(bvgridLess);
 
@@ -183,7 +183,6 @@ class EasyGrid {
 
             // Fade In Item
             fadeIn(block, animations.fadeInSpeed);
-
         }
 
         // Setup Columns
@@ -237,25 +236,27 @@ class EasyGrid {
         // Startup EasyGrid
         this.SetupGrid = function(number) {
 
+            // Save all items inside main selector, when SetupColumns all items inside selector are removed.
+            if(_this.config['fetchFromHTML'] == true)
+            {
+                var fetchedItems = [];
+                document.querySelectorAll("#"+selector + ' .easygrid_fetch').forEach((item_fetch) => {
+                    fetchedItems.push(item_fetch.innerHTML);
+                });
+            }
+
             // Setup Columns
             this.SetupColumns();
 
-            // If Fetch from HTML is true, it will fetch all HTML items inside main div
-            if(config.fetchFromHTML == true)
+            // Fetch from all items
+            if(_this.config['fetchFromHTML'] == true)
             {
-                // Set original items to display none
-                document.querySelectorAll("#"+selector + ' .easygrid_fetch').forEach((item_original) => {
-                    item_original.style.display = "none";
-                });
+                var arrayLength = fetchedItems.length;
+                for (var array_block = 0; array_block < arrayLength; array_block++) {
+                    AddItems(fetchedItems[array_block]);
+                }
 
-                document.querySelectorAll("#"+selector + ' .easygrid_fetch').forEach((item_fetch) => {
-                    
-                    // Fetch items from HTML and add to EasyGrid
-                    AddItems(item_fetch.innerHTML);
-                    // Remove original item
-                    item_fetch.remove();
-
-                });
+                fetchedItems = [];
             }
         };
 
@@ -274,19 +275,14 @@ class EasyGrid {
                 var itemsArray = [];
 
                 document.querySelectorAll("#"+selector + ' .easygrid_column ').forEach((item) => {
-
                     var idColumn = item.id;
                     document.querySelectorAll("#"+idColumn + ' .easygrid_block').forEach((itemBlock) => {
-
                         // Increase block count
                         var str2 = itemBlock.id;
                         var parts = str2.split('_');
                         var blockid = parts[parts.length - 2];
-
                         itemsArray.push(({'element': itemBlock.innerHTML, 'sort': blockid}));
-
                     });
-
                 });
 
                 // Sort array
@@ -326,87 +322,108 @@ class EasyGrid {
     // Add New Item
     async AddItem(content) {
 
-        // Function to Sleep
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        // OnComplete Callback
-        function onComplete(callback) { 
-            if (typeof callback == "function") { callback();}
-        } 
-
-        // Check if content is object
-        if(content.items && typeof(content.items) === 'object')
+        if(this.queueItem == 0)
         {
-            // Loop object and add invidual items
-            var prop = Object.keys(content.items).length;
+            // Function to Sleep
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+            // OnComplete Callback
+            function onComplete(callback) { 
+                if (typeof callback == "function") { callback();}
+            } 
 
-            // Loop object and add invidual items
-            var prop = Object.keys(content.items).length;
-            for (var i = 0; i < prop; i++) {
+            // Check if content is object
+            if(content.items && typeof(content.items) === 'object')
+            {
+                // Loop object and add invidual items
+                var prop = Object.keys(content.items).length;
 
-                // Check if object is empty
-                if(content["items"][i] != "")
-                {
-                    // Add Item to grid
-                    this.AddItems(content["items"][i]);
-                    await sleep(this.animation.addItemSpeed); // Wait
+                // Loop object and add invidual items
+                var prop = Object.keys(content.items).length;
+                for (var i = 0; i < prop; i++) {
+
+                    // Set qeue line 
+                    this.queueItem = 1; // There are items in line
+
+                    // Check if object is empty
+                    if(content["items"][i] != "")
+                    {
+                        // Add Item to grid
+                        this.AddItems(content["items"][i]);
+                        await sleep(this.animation.addItemSpeed); // Wait
+                    }
                 }
+
+                // Set qeue line 
+                this.queueItem = 0; // There no are items in line
+
+                // if is "onComplete" is a function, call it back.
+                if (typeof content.onComplete == "function") { onComplete(content.onComplete); }
+
+            } else {
+
+                // Add Item to grid
+                this.AddItems(content.items);
+
+                // if is "onComplete" is a function, call it back.
+                if (typeof content.onComplete == "function") { onComplete(content.onComplete); }
             }
 
-            // if is "onComplete" is a function, call it back.
-            if (typeof content.onComplete == "function") { onComplete(content.onComplete); }
-
         } else {
-
-            // Add Item to grid
-            this.AddItems(content.items);
-
-            // if is "onComplete" is a function, call it back.
-            if (typeof content.onComplete == "function") { onComplete(content.onComplete); }
+            return "There are items in qeue";
         }
+
     }
 
     // Start up Easygrid from scrath
     SetupEasyGrid() {
 
         // Setup Columns
-        this.SetupColumns();
+        if(this.queueItem == 0)
+        {
+            this.SetupColumns();
+        } else { return "There are items in qeue"; }
     }
 
     // Clear Grid
     Change(content) {
 
-        // Check if content is object
-        if(content && typeof(content) === 'object')
+        // Check items in qeue
+        if(this.queueItem == 0)
         {
-            // Clear grid in case someone want to change while is adding items
-            document.getElementById(this.selector).innerHTML = "";
+            // Check if content is object
+            if(content && typeof(content) === 'object')
+            {
+                // Clear grid in case someone want to change while is adding items
+                document.getElementById(this.selector).innerHTML = "";
 
-            // Update values
+                // Check if contains Style
+                if ("style" in content) {
+                    this.style = content.style;
+                }
+                // Check if contains Dimensions
+                if ("dimensions" in content) {
+                    this.dimensions = content.dimensions;
+                }
 
-            // Check if contains Style
-            if ("style" in content) {
-                this.style = content.style;
+                // Setup Columns with new width
+                this.SetupColumns();
+
+            } else {
+                console.log("Properties must be Object, Check documentation.")
             }
-            // Check if contains Dimensions
-            if ("dimensions" in content) {
-                this.dimensions = content.dimensions;
-            }
-
-            // Setup Columns with new width
-            this.SetupColumns();
-
-        } else {
-            console.log("Properties must be Object, Check documentation.")
-        }
+        } else { return "There are items in qeue"; }
     }
 
     // Clear Grid
     Clear() {
 
         // Clear current grid and apend items again in the same order
-        document.getElementById(this.selector).innerHTML = "";
+        if(this.queueItem == 0)
+        {
+            document.getElementById(this.selector).innerHTML = "";
+        } else { return "There are items in qeue"; }
     }
+
 }
