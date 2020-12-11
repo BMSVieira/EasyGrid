@@ -11,6 +11,7 @@
 - 💪 No Dependencies, built with VanillaJS
 - 🌎 Tested in All Modern Browsers
 - 💻 Responsive
+- 🗂 Filtering
 - 📈 Fast & Reliable
 - 📚 Does not need CSS or any CSS Framework
 
@@ -127,6 +128,13 @@ After use of SetupEasyGrid() it can be added new items again.
 demo1.SetupEasyGrid();
 ```
 
+<b>Filter:</b>
+Filter all elements that match specific class.<br>
+
+```javascript
+demo1.Filter("egfilter_blue");
+```
+
 ◼️ Settings:
 -
 | Option | Type | Options Available | Description |
@@ -138,6 +146,7 @@ demo1.SetupEasyGrid();
 | `dimensions` > `minHeight` | `Integer` | `Integer` |  Min. Height (px) of the elements if height is `random`|
 | `dimensions` > `maxHeight` | `Integer` | `Integer` |  Max. Height (px) of the elements if height is `random`| 
 | `config` > `fetchFromHTML` | `Boolean` | --- |  Fetch elements inside main div to EasyGrid|
+| `config` > `filter` | `Boolean` | --- |  Enables filter, fetchFromHTML is automatically enabled when using filters|
 | `animations` > `fadeInSpeed` | `Integer` | `Integer` |  Speed(ms) that the item takes to appear completely after being added|
 | `animations` > `addItemSpeed` | `Integer` | `Integer` |  Speed(ms) at which each item is added|
 | `style` > `background` | `String` | `random`, `shadesOfGrey`, `HEX`, `RGBA` |  Item's Background color|
@@ -157,7 +166,8 @@ document.addEventListener("DOMContentLoaded", function() {
               maxHeight: "40"  // if height is "random"
              },
              config: {
-              fetchFromHTML: true
+              fetchFromHTML: true, // FetchFromHTML is automatically Enabled when using filters
+              filter: true
              },
              animations: {
                fadeInSpeed: "100",
@@ -172,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function() {
 ```
 
 <b>FetchFromHTML Example:</b><br>
-To fetch elements from html, it has to be placed inside main div and with a specific class called: `easygrid_fetch`
+To fetch elements from html, it has to be placed inside main div with a specific class called: `easygrid_fetch`
 
 ```html
 <!--  Main Div -->
@@ -187,5 +197,38 @@ To fetch elements from html, it has to be placed inside main div and with a spec
         <!-- HTML Elements -->
     </div>
  
+</div>
+```
+
+<b>Filters Example:</b><br>
+All classes that will serve as a filter, must begin with `egfilter_`<br>
+Whenever you want to show all items use `egfilter_all`, it is created automatically and contains all elements, does not need to be specified in each item.
+
+
+```html
+<!--  Main Div -->
+<div id="grid" class="easygrid_bvgrid"> 
+
+     <!-- This item will be fetched to EasyGrid and then removed -->
+     <div class="easygrid_fetch egfilter_blue egfilter_red egfilter_purple"> HTML CODE HERE </div>
+     <!-- This item will be fetched to EasyGrid and then removed -->
+     <div class="easygrid_fetch egfilter_blue egfilter_red"> HTML CODE HERE </div>
+     <!-- This item will be fetched to EasyGrid and then removed -->
+     <div class="easygrid_fetch egfilter_blue"> HTML CODE HERE </div>
+     <!-- This item will be fetched to EasyGrid and then removed -->
+     <div class="easygrid_fetch egfilter_green egfilter_blue"> HTML CODE HERE </div>
+     <!-- This item will be fetched to EasyGrid and then removed -->
+     <div class="easygrid_fetch egfilter_green egfilter_blue"> HTML CODE HERE </div>
+     <!-- This item will be fetched to EasyGrid and then removed -->
+     <div class="easygrid_fetch egfilter_green"> HTML CODE HERE </div>
+     <!-- This item will be fetched to EasyGrid and then removed -->
+     <div class="easygrid_fetch egfilter_purple"> HTML CODE HERE </div>
+     <!-- This item will be fetched to EasyGrid and then removed -->
+     <div class="easygrid_fetch egfilter_red"> HTML CODE HERE </div>
+     <!-- This item will be fetched to EasyGrid and then removed -->
+     <div class="easygrid_fetch egfilter_red"> HTML CODE HERE </div>
+     <!-- This item will be fetched to EasyGrid and then removed -->
+     <div class="easygrid_fetch egfilter_red"> HTML CODE HERE </div>
+
 </div>
 ```
