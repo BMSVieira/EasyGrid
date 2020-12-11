@@ -18,59 +18,107 @@
 </head>
 <body style="min-height:1000px;">
   
+    <div class="container">
+      <div class="row" style="margin-top:30px;">
+          <div class="col-12 col-md-12 cold-sm-12" style="text-align: center; border-bottom: 1px solid grey; margin-bottom: 12px; padding-bottom: 13px;">
+
+            <button type="button" id="all" class="btn btn-dark">All</button>
+            <button type="button" id="blue"  class="btn btn-primary">Blue</button>
+            <button type="button" id="purple"  class="btn btn-primary" style="background-color: #bb16bb; border-color: #d230d2;">Purple</button>
+            <button type="button" id="red"  class="btn btn-primary" style="background-color: red; border-color: red;">Red</button>
+            <button type="button" id="green"  class="btn btn-primary" style="background-color: #30b530; border-color: #28ce28;">Green</button>
+
+          </div>
+      </div>
+    </div>
+
     <!-- EasyGrid Main Div -->
     <div id="grid" class="easygrid_bvgrid" style="width:100%; margin-top:5px;"> 
 
           <!-- This item will be fetched to EasyGrid and then removed -->
-          <div class="easygrid_fetch" style="display:none;">Item 1</div>
+          <div class="easygrid_fetch egfilter_blue egfilter_red egfilter_purple"><img style="width:100%;" src="demo-template/images/blue_purple_red.png"></div>
           <!-- This item will be fetched to EasyGrid and then removed -->
-          <div class="easygrid_fetch" style="display:none;">Item 2</div>
+          <div class="easygrid_fetch egfilter_blue egfilter_red"><img style="width:100%;" src="demo-template/images/red_blue.png"></div>
           <!-- This item will be fetched to EasyGrid and then removed -->
-          <div class="easygrid_fetch" style="display:none;">Item 3</div>
+          <div class="easygrid_fetch egfilter_blue"><img style="width:100%;" src="demo-template/images/blue.png"></div>
           <!-- This item will be fetched to EasyGrid and then removed -->
-          <div class="easygrid_fetch" style="display:none;">Item 4</div>
+          <div class="easygrid_fetch egfilter_green egfilter_blue"><img style="width:100%;" src="demo-template/images/green_blue.png"></div>
           <!-- This item will be fetched to EasyGrid and then removed -->
-          <div class="easygrid_fetch" style="display:none;">Item 5</div>
+          <div class="easygrid_fetch egfilter_green egfilter_blue"><img style="width:100%;" src="demo-template/images/green_blue.png"></div>
           <!-- This item will be fetched to EasyGrid and then removed -->
-          <div class="easygrid_fetch" style="display:none;">Item 6</div>
+          <div class="easygrid_fetch egfilter_green"><img style="width:100%;" src="demo-template/images/green.png"></div>
           <!-- This item will be fetched to EasyGrid and then removed -->
-          <div class="easygrid_fetch" style="display:none;">Item 7</div>
+          <div class="easygrid_fetch egfilter_purple"><img style="width:100%;" src="demo-template/images/purple.png"></div>
           <!-- This item will be fetched to EasyGrid and then removed -->
-          <div class="easygrid_fetch" style="display:none;">Item 8</div>
+          <div class="easygrid_fetch egfilter_red"><img style="width:100%;" src="demo-template/images/red.png"></div>
           <!-- This item will be fetched to EasyGrid and then removed -->
-          <div class="easygrid_fetch" style="display:none;">Item 9</div>
+          <div class="easygrid_fetch egfilter_red"><img style="width:100%;" src="demo-template/images/red.png"></div>
           <!-- This item will be fetched to EasyGrid and then removed -->
-          <div class="easygrid_fetch" style="display:none;">Item 10</div>
+          <div class="easygrid_fetch egfilter_red"><img style="width:100%;" src="demo-template/images/red.png"></div>
 
     </div>
 
+
+     <button style="margin-bottom:10px; z-index:9999; position:relative;" id="randomtiles" class="btn btn-dark">Random Height</button>
+
     <script src="js/easygrid.js"></script>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
 
-          var demo1 = new EasyGrid({
+        /* RANDOM TILES */
+        var demo1;
+        document.addEventListener("DOMContentLoaded", function() {
+
+          demo_filtering = new EasyGrid({
              selector: "#grid",
              dimensions: {
-              width: "150",
-              height: "270",
+              width: "200",
+              height: "auto",
               margin: "5",
               minHeight: "20", // if height is "random"
               maxHeight: "40"  // if height is "random"
              },
              config: {
-              fetchFromHTML: true
+              fetchFromHTML: true,
+              filter: true
              },
              animations: {
                fadeInSpeed: "100",
                addItemSpeed: "100"
              },
              style: {
-               background: "random",
-               borderRadius: "5"
+               background: "transparent",
+               borderRadius: "10"
              }
           });
 
-     });
+        });   
+
+        /* all */
+        document.getElementById("all").addEventListener("click", function() {
+
+             demo_filtering.Filter("all"); 
+        });   
+        /* BLUE */
+        document.getElementById("blue").addEventListener("click", function() {
+
+             demo_filtering.Filter("egfilter_blue"); 
+        });   
+        /* PURPLE */
+        document.getElementById("purple").addEventListener("click", function() {
+
+             demo_filtering.Filter("egfilter_purple"); 
+        });   
+        /* RED */
+        document.getElementById("red").addEventListener("click", function() {
+
+             demo_filtering.Filter("egfilter_red"); 
+        });   
+        /* GREEEN */
+        document.getElementById("green").addEventListener("click", function() {
+
+             demo_filtering.Filter("egfilter_green"); 
+        });   
+
 
     </script>
 

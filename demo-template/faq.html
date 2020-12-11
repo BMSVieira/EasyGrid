@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.79.0">
+    <title>EasyGrid - FAQ</title>
+
+    <!-- EasyGrid Plugin Style -->
+    <link rel="stylesheet" type="text/css" href="../css/easygrid.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="pricing.css" rel="stylesheet">
+  </head>
+  <body>
+        
+    <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+      <p class="h5 my-0 me-md-auto fw-normal"><img style="width:250px;"  src="images/easy_small.png"></p>
+      <nav class="my-2 my-md-0 me-md-3">
+        <a class="btn btn-outline-dark" href="demo.html">Demo</a>
+        <a class="btn btn-outline-dark" href="faq.html">FAQ</a>
+        <a class="btn btn-dark" href="https://github.com/BMSVieira/EasyGrid">View on Github</a>
+      </nav>
+    </header>
+
+    <div class="col-md-12" style="background-color: #009fff; margin-top: -16px; color: white;">
+      <div class="container">
+      <p style="font-size: 28pt;font-style: italic;padding: 12px;">Frequently Asked Questions</p>
+      </div>
+    </div>
+
+    <main class="container" style="margin-top: 45px;">
+      <div class="row row-cols-1 row-cols-md-3 mb-3">
+        <div class="col-md-12">
+              <blockquote class="blockquote text-right">
+                <p class="mb-0" style="text-align:left; font-weight:bold; ">"Why would you make a responsive grid in js and not just use a few lines of css grid?"</p>
+                <footer class="blockquote-footer" style="margin-top:2px; text-align:left; ">Someone famous in <cite title="Source Title">Reddit</cite></footer>
+              </blockquote>
+              <p>
+                If you want to add a little more dynamics to your grid, this is for you because this library provides a quick way to add new items, make random grids, filtering,  even background effects.
+                <br>EasyGrid makes it faster and more efficient because it does basically everything for you...and the best part is that it is dependency-free (JS and CSS).
+              </p>
+
+
+              <blockquote class="blockquote text-right" style="margin-top:30px;">
+                <p class="mb-0" style="text-align:left; font-weight:bold; ">"Why i need this when i have a css framework?"</p>
+                <footer class="blockquote-footer" style="margin-top:2px; text-align:left; ">Someone famous in <cite title="Source Title">Reddit</cite></footer>
+              </blockquote>
+              <p>
+                <u>It is not meant to replace any CSS Framework</u>, in fact, works even better when both are combined.<br>
+              </p>
+
+              <blockquote class="blockquote text-right" style="margin-top:30px;">
+                <p class="mb-0" style="text-align:left; font-weight:bold; ">"Can i do filtering with this library?"</p>
+                <footer class="blockquote-footer" style="margin-top:2px; text-align:left; ">Someone famous in <cite title="Source Title">Reddit</cite></footer>
+              </blockquote>
+              <p>
+                Yes, the latest version of EG allows you to make filtering. Check <a href="demo.html"> demo page</a> for a sneak peak of what you can do.
+              </p>
+
+        </div>
+      </div>
+
+    <footer class="pt-4 my-md-5 pt-md-5 border-top" style="text-align: center;">
+      <div class="row">
+        <div class="col-12 col-md">
+          <a href="https://github.com/BMSVieira/EasyGrid" target="_blank"><img class="mb-2" src="https://image.flaticon.com/icons/png/512/25/25231.png" alt="" width="35" height="35"></a>
+        </div>
+      </div>
+    </footer>
+
+    </main>
+  </body>
+
+  <script src="../js/easygrid.js"></script>
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+            demo1 = new EasyGrid({
+                selector: "#grid",
+                dimensions: {
+                  width: "20",
+                  height: "random",
+                  margin: "15",
+                  minHeight: "20",
+                  maxHeight: "40"
+                },
+                animations: {
+                  fadeInSpeed: "500"
+                },
+                style: {
+                  background: "random",
+                  borderRadius: "5"
+                }
+            });
+      });
+  </script>
+  </html>
