@@ -19,7 +19,8 @@ class EasyGrid {
           maxHeight: "300"
         },
         config = {
-            fetchFromHTML: true
+            fetchFromHTML: true,
+            filter: true
          },
         animations = {
             fadeInSpeed: "100",
@@ -67,6 +68,9 @@ class EasyGrid {
         var ncolumns, additem;
         var widthM = 0, widthM2 = 0, countAddblock=0;
         var _this = this;
+
+        var filtersArray = {};
+        var allItemsFilter = {};
 
         // Apply style to main grid container
         document.getElementById(selector).style.paddingRight = margin+"px";
@@ -233,30 +237,110 @@ class EasyGrid {
 
         }
 
-        // Startup EasyGrid
-        this.SetupGrid = function(number) {
-
-            // Save all items inside main selector, when SetupColumns all items inside selector are removed.
-            if(_this.config['fetchFromHTML'] == true)
-            {
-                var fetchedItems = [];
-                document.querySelectorAll("#"+selector + ' .easygrid_fetch').forEach((item_fetch) => {
-                    fetchedItems.push(item_fetch.innerHTML);
-                });
-            }
+        // Change items according to filters
+        var SetFilters = this.SetFilters = function SetFilters(parameter)
+        {
 
             // Setup Columns
             this.SetupColumns();
 
-            // Fetch from all items
-            if(_this.config['fetchFromHTML'] == true)
+            // Check if parameter is all
+            if(parameter == "egfilter_all")
             {
-                var arrayLength = fetchedItems.length;
-                for (var array_block = 0; array_block < arrayLength; array_block++) {
-                    AddItems(fetchedItems[array_block]);
+     
+                Object.keys(allItemsFilter["egfilter_all"]).forEach(function(key) {
+                     _this.AddItems(allItemsFilter["egfilter_all"][key].innerHTML);
+                });
+
+            } else {
+                    var size = Object.keys(allItemsFilter[parameter]).length;
+                    for (var i = 0; i < size; i++) {
+                        this.AddItems(allItemsFilter[parameter][i].innerHTML);
+                    }
+            }
+        }
+
+        // Startup filter, set all different buttons based 
+        var StartFilter = this.StartFilter = function StartFilter()
+        {
+                // Get diferent types of classes
+                document.querySelectorAll("#"+selector + ' .easygrid_fetch').forEach((item_fetch_clist) => {
+
+                    // Get all diferent types of classes
+                    var classLength = item_fetch_clist["classList"].length;
+                    for (var i = 0; i < classLength; i++) {
+                
+                        var itemClass = item_fetch_clist["classList"][i];
+                        if(itemClass != "easygrid_fetch")
+                        {
+                            if(itemClass.startsWith("egfilter"))
+                            {
+                                filtersArray[itemClass] = {};
+                                allItemsFilter[itemClass] = {};  
+                            }
+                        }                            
+                    }
+                });
+
+                // Loop those classes and get all elements containing that class
+                for (var key in allItemsFilter) {
+                    var pos = 0;
+                    if (allItemsFilter.hasOwnProperty(key)) {               
+                        document.querySelectorAll("#"+selector + " ."+key).forEach((item_fetch_separate) => {
+
+                            allItemsFilter[key][pos] = item_fetch_separate; 
+                            pos++;
+                        });
+                    }
                 }
 
-                fetchedItems = [];
+                // Add all category, where it stores all items
+                allItemsFilter["egfilter_all"] = {};
+                var posall = 0;
+                document.querySelectorAll("#"+selector + ' .easygrid_fetch').forEach((item_fetch_all) => {
+
+                    allItemsFilter["egfilter_all"][posall] = item_fetch_all;
+                    posall++;
+
+                });
+
+                // Set filter 
+                this.SetFilters("egfilter_all");
+        }
+
+        // Startup EasyGrid
+        this.SetupGrid = function(number) {
+
+            // Check if filter config is active
+            if(_this.config['filter'] == true)
+            {
+                this.StartFilter();
+
+            } else {
+
+                // Save all items inside main selector, when SetupColumns all items inside selector are removed.
+                if(_this.config['fetchFromHTML'] == true)
+                {
+                    var fetchedItems = [];
+                    document.querySelectorAll("#"+selector + ' .easygrid_fetch').forEach((item_fetch) => {
+                        fetchedItems.push(item_fetch.innerHTML);
+                    });
+
+                }
+
+                // Setup Columns
+                this.SetupColumns();
+
+                // Fetch from all items
+                if(_this.config['fetchFromHTML'] == true)
+                {
+                    var arrayLength = fetchedItems.length;
+                    for (var array_block = 0; array_block < arrayLength; array_block++) {
+                        AddItems(fetchedItems[array_block]);
+                    }
+
+                    fetchedItems = [];
+                }
             }
         };
 
@@ -414,6 +498,17 @@ class EasyGrid {
                 console.log("Properties must be Object, Check documentation.")
             }
         } else { return "There are items in qeue"; }
+    }
+
+    // Clear Grid
+    Filter(filter_name) {
+
+        // Check filter if it is empty
+        if(filter_name)
+        {
+           this.SetFilters(filter_name);  
+        }
+
     }
 
     // Clear Grid
