@@ -151,6 +151,8 @@ demo1.Filter("egfilter_blue");
 | `animations` > `addItemSpeed` | `Integer` | `Integer` |  Speed(ms) at which each item is added|
 | `style` > `background` | `String` | `random`, `shadesOfGrey`, `HEX`, `RGBA` |  Item's Background color|
 | `style` > `borderRadius` | `Integer` | `Integer` |  Item's Border Radius|
+| `responsive` > `breakpoint` | `Integer` | `Integer` |  Responsive breakpoint, interrupts natural flow of EasyGrid and adds desired columns|
+| `responsive` > `columns` | `Integer` | `Integer` |  Number of columns after breakpoint|
 
 <b>Full Example:</b>
 
@@ -176,7 +178,17 @@ document.addEventListener("DOMContentLoaded", function() {
              style: {
                background: "random",
                borderRadius: "5"
-             }
+             },
+             responsive: [
+                {
+                  breakpoint: 500,
+                  columns: 2
+                },
+                {
+                  breakpoint: 300,
+                  columns: 1
+                }
+            ]
         });
 });
 ```
