@@ -122,7 +122,7 @@ demo1.Clear();
 
 <b>SetupEasyGrid:</b>
 Add responsive columns.
-After use of SetupEasyGrid() it can be added new items again.
+After use of `SetupEasyGrid()` it can be added new items again.
 
 ```javascript
 demo1.SetupEasyGrid();
@@ -132,7 +132,7 @@ demo1.SetupEasyGrid();
 Filter all elements that match specific class.<br>
 
 ```javascript
-demo1.Filter("egfilter_blue");
+demo1.Filter();
 ```
 
 ◼️ Settings:
