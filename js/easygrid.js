@@ -20,7 +20,7 @@ class EasyGrid {
         },
         config = {
             fetchFromHTML: true,
-            filter: true
+            filter: false
          },
         animations = {
             fadeInSpeed: "100",
@@ -485,6 +485,8 @@ class EasyGrid {
                 if(this.config["filter"] == true)
                 {
 
+
+                    console.log(this.config["filter"]);
                     // Convert string to DOM
                     var doc = new DOMParser().parseFromString(content.items, "text/html");
 
