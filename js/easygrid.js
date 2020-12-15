@@ -71,6 +71,8 @@ class EasyGrid {
 
         var filtersArray = {};
         var allItemsFilter = {};
+        this.allItemsFilter = allItemsFilter;
+        this.filtersArray = filtersArray;
 
         // Apply style to main grid container
         document.getElementById(selector).style.paddingRight = margin+"px";
@@ -422,10 +424,42 @@ class EasyGrid {
             {
                 // Loop object and add invidual items
                 var prop = Object.keys(content.items).length;
-
-                // Loop object and add invidual items
-                var prop = Object.keys(content.items).length;
                 for (var i = 0; i < prop; i++) {
+
+                    //  If filter is on
+                    if(this.config["filter"] == true)
+                    {
+                        // Convert string to DOM
+                        var doc = new DOMParser().parseFromString(content["items"][i], "text/html");                   
+                        var classlist_length = doc["body"]["firstChild"]["classList"].length; 
+                        var parsedString = doc["body"];              
+
+                        // Loop every class
+                        for (var j = 0; j < classlist_length; j++) {
+
+                            // Filter Name
+                            var class_name = doc["body"]["firstChild"]["classList"][j];
+
+                            // Check if filter starts with egfilter_
+                            if(class_name.startsWith("egfilter_"))
+                            {
+                                // If filter doest exists, adds a new one
+                                if(!this.allItemsFilter.hasOwnProperty(class_name))
+                                {
+                                    this.filtersArray[class_name] = {};
+                                    this.allItemsFilter[class_name] = {};  
+                                } 
+
+                                // Get length of that filter
+                                var prop_unique = Object.keys(this.allItemsFilter[class_name]).length;
+                                var prop_all = Object.keys(this.allItemsFilter["egfilter_all"]).length;
+
+                                // Add to array and to all
+                                this.allItemsFilter[class_name][prop_unique] = parsedString;
+                                this.allItemsFilter["egfilter_all"][prop_all] = parsedString;
+                            }
+                        }
+                    }
 
                     // Set qeue line 
                     this.queueItem = 1; // There are items in line
@@ -447,11 +481,49 @@ class EasyGrid {
 
             } else {
 
+                //  If filter is on
+                if(this.config["filter"] == true)
+                {
+
+                    // Convert string to DOM
+                    var doc = new DOMParser().parseFromString(content.items, "text/html");
+
+                    var classlist_length = doc["body"]["firstChild"]["classList"].length; 
+                    var parsedString = doc["body"];              
+
+                    // Loop every class
+                    for (var i = 0; i < classlist_length; i++) {
+
+                        // Filter Name
+                        var class_name = doc["body"]["firstChild"]["classList"][i];
+
+                        // Check if filter starts with egfilter_
+                        if(class_name.startsWith("egfilter_"))
+                        {
+                            // If filter doest exists, adds a new one
+                            if(!this.allItemsFilter.hasOwnProperty(class_name))
+                            {
+                                this.filtersArray[class_name] = {};
+                                this.allItemsFilter[class_name] = {};  
+                            } 
+
+                            // Get length of that filter
+                            var prop_unique = Object.keys(this.allItemsFilter[class_name]).length;
+                            var prop_all = Object.keys(this.allItemsFilter["egfilter_all"]).length;
+
+                            // Add to array and to all
+                            this.allItemsFilter[class_name][prop_unique] = parsedString;
+                            this.allItemsFilter["egfilter_all"][prop_all] = parsedString;
+                        }
+                     }
+                }
+
                 // Add Item to grid
                 this.AddItems(content.items);
 
                 // if is "onComplete" is a function, call it back.
                 if (typeof content.onComplete == "function") { onComplete(content.onComplete); }
+
             }
 
         } else {
