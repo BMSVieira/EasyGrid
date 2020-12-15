@@ -72,7 +72,8 @@ demo1.Refresh();
 ```
 
 <b>AddItem:</b>
-Add a new item to grid
+Add a new item to grid<br>
+If `filter` is enabled, it will automatically add to all classes that match the existing filters, otherwise, all filters starting with `egfilter_` will be added and available for use.
 
 | Value | Description |
 | --- | --- |
@@ -85,6 +86,9 @@ Add a new item to grid
 var Elements = "HTML Element";
 // Array
 var Elements = ["HTML Element 1", "HTML  Element 2", "HTML  Element 3", "HTML  Element 4"];
+// Filter
+// In this example, it will add a new item to existing "egfilter_red" filter and a new filter called "egfilter_orange" ready to be used.
+var Elements = ['<div class="egfilter_red egfilter_orange"><img style="width:100%;" src="demo-template/images/black.png"></div>'];
 
 demo1.AddItem({
    items: Elements,
