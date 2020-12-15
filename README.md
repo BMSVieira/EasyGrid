@@ -88,7 +88,7 @@ var Elements = "HTML Element";
 var Elements = ["HTML Element 1", "HTML  Element 2", "HTML  Element 3", "HTML  Element 4"];
 // Filter
 // In this example, it will add a new item to existing "egfilter_red" filter and a new filter called "egfilter_orange" ready to be used.
-var Elements = ['<div class="egfilter_red egfilter_orange"><img style="width:100%;" src="demo-template/images/black.png"></div>'];
+var Elements = ['<div class="egfilter_red egfilter_orange"><img style="width:100%;" src="demo-template/images/orange.png"></div>'];
 
 demo1.AddItem({
    items: Elements,
